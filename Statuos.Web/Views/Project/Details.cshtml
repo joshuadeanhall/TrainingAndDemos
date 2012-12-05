@@ -1,0 +1,29 @@
+﻿@model Statuos.Web.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Project</legend>
+
+    <div class="display-label" id="project-title">
+         @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label" id="project-estimatedhours">
+         @Html.DisplayNameFor(model => model.EstimatedHours): @Html.DisplayFor(model => model.EstimatedHours)
+    </div>
+
+    <div class="display-label" id="project-customer">
+         @Html.DisplayNameFor(model => model.CustomerId): 
+    </div>
+
+</fieldset>
+<!-- In future change to Render Action or AJAX -->
+@{ Html.RenderPartial("_ProjectTasks", Model.Tasks); }
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

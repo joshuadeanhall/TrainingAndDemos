@@ -1,0 +1,10 @@
+﻿@model Statuos.Web.Models.ProjectViewModel
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CustomerId)
+</div>
+<div class="editor-field">
+    @Html.DropDownList("CustomerId", ViewBag.Customers as SelectList, String.Empty)
+    @Html.ValidationMessageFor(model => model.CustomerId)
+</div>
+

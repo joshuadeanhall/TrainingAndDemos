@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Statuos.Web.Models.TaskViewModel>
+
+<p>
+    @using (Html.BeginForm("CreateTaskType", "Task"))
+    {
+        @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList, string.Empty)
+        <input type="submit" value="Create" />
+        
+    }
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserNames)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstimatedHours)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserNames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedHours)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>
