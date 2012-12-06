@@ -1,4 +1,6 @@
-﻿In order to use the Intranet template, you'll need to enable Windows authentication
+﻿This is a test
+
+In order to use the Intranet template, you'll need to enable Windows authentication
 and disable Anonymous authentication.
 
 IIS 7 & IIS 8
