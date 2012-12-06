@@ -41,6 +41,7 @@ namespace Statuos.Web.Controllers
         public ActionResult Details(int id = 0)
         {
             SetupTaskTypesViewBag();
+            //TODO improve method for checking if user is manager
             Project project = _projectRepository.All.Include(p => p.Tasks).Where(p => p.Id == id).UserIsProjectManagerQuery(User.Identity.Name).FirstOrDefault();
             if (project == null)
             {
