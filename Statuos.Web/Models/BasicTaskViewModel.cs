@@ -7,5 +7,9 @@ namespace Statuos.Web.Models
 {
     public class BasicTaskViewModel : TaskViewModel
     {
+        public override string TaskType
+        {
+            get { return "Basic"; }
+        }
     }
 }

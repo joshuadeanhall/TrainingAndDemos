@@ -36,7 +36,8 @@ namespace Statuos.Web.Areas.Admin.Controllers
 
         private void SetupProjectTypesViewBag()
         {
-            ViewBag.ProjectTypes = new SelectList(TypeHelper.GetTypes<ProjectViewModel>(), "Type", "Name");
+            List<TypeViewModel> types = TypeHelper.GetTypes<ProjectViewModel>();
+            ViewBag.ProjectTypes = new SelectList(types, "Type", "Name");
         }
         //
         // GET: /Admin/Project/
@@ -67,7 +68,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
         //
         // GET: /Admin/Project/Create
 
-        public ActionResult CreateProjectType(ProjectViewModel projectviewmodel)
+        public ActionResult CreateProjectType(ProjectViewModel projectviewmodel = null)
         {
             SetupCustomerViewBag();
             return View("Create", projectviewmodel);

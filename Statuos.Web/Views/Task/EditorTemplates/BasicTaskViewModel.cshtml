@@ -1,0 +1,9 @@
+﻿@model BasicTaskViewModel
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.EstimatedHours)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.EstimatedHours)
+    @Html.ValidationMessageFor(model => model.EstimatedHours)
+</div>

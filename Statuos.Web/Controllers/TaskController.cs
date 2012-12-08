@@ -79,7 +79,7 @@ namespace Statuos.Web.Controllers
                 taskModel.Users.Add(user);
             }
             _taskService.Add(taskModel);
-            return View("Index", _taskRepository.All.MapTo<TaskViewModel>());
+            return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
         }
         
 

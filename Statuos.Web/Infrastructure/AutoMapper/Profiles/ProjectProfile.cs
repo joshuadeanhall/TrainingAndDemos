@@ -20,7 +20,8 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
             //Mapper.CreateMap<Project, ProjectViewModel>()
             //    .ForMember(x => x.ProjectType, o => o.MapFrom(m => m.ProjectTypeDescription));
             Mapper.CreateMap<Project, ProjectViewModel>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.ProjectManager.UserName))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.ProjectManager.UserName))  
+                .ForMember(dest => dest.CustomerName,opt => opt.MapFrom(src => src.Customer.Name))
                 .Include<BasicProject, BasicProjectViewModel>()
                 .Include<MaxHoursProject, MaxHoursProjectViewModel>();
             Mapper.CreateMap<BasicProject, BasicProjectViewModel>();

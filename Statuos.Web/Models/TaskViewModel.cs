@@ -13,6 +13,7 @@ namespace Statuos.Web.Models
         public string Title { get; set; }
         public string UserNames { get; set; }
         public decimal EstimatedHours { get; set; }
+        public abstract string TaskType { get; }
 
         [HiddenInput(DisplayValue = false)]
         public string ConcreteModelType { get { return this.GetType().ToString(); } }

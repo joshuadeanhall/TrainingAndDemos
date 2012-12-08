@@ -8,8 +8,8 @@
 <p>
     @using (Html.BeginForm("CreateProjectType", "Project"))
     {
-        @Html.DropDownList("ConcreteModelType", ViewBag.ProjectTypes as SelectList, string.Empty)
-        <input type="submit" value="Save" />
+        @Html.DropDownList("ConcreteModelType", ViewBag.ProjectTypes as SelectList)
+        <input type="submit" value="Create" />
         
     }
 </p>
@@ -22,16 +22,13 @@
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.DisplayNameFor(model => model.CustomerName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EstimatedHours)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProjectType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ConcreteModelType)
         </th>
         <th></th>
     </tr>
@@ -46,16 +43,13 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
+                @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EstimatedHours)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProjectType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConcreteModelType)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

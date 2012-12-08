@@ -12,27 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statuos.Test", "Statuos.Test\Statuos.Test.csproj", "{625B9C40-F45B-4AD4-A82B-1C1B48F809B0}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Statuos.Data\\Statuos.Data.csproj
-		SccProjectName1 = Statuos.Data
-		SccLocalPath1 = Statuos.Data
-		SccProjectUniqueName2 = Statuos.Web\\Statuos.Web.csproj
-		SccProjectName2 = Statuos.Web
-		SccLocalPath2 = Statuos.Web
-		SccProjectUniqueName3 = Statuos.Service\\Statuos.Service.csproj
-		SccProjectName3 = Statuos.Service
-		SccLocalPath3 = Statuos.Service
-		SccProjectUniqueName4 = Statuos.Test\\Statuos.Test.csproj
-		SccProjectName4 = Statuos.Test
-		SccLocalPath4 = Statuos.Test
-		SccProjectUniqueName5 = Statous.Domain\\Statuos.Domain.csproj
-		SccProjectName5 = Statous.Domain
-		SccLocalPath5 = Statous.Domain
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

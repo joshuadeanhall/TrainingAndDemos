@@ -8,5 +8,10 @@ namespace Statuos.Web.Models
     public class PhoneRequestTaskViewModel : TaskViewModel
     {
         public string PhoneNumber { get; set; }
+
+        public override string TaskType
+        {
+            get { return "Phone Request"; }
+        }
     }
 }

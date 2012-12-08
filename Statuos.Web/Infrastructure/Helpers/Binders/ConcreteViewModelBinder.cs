@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Statuos.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,11 +12,21 @@ namespace Statuos.Web.Infrastructure.Helpers.Binders
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
             var typeValue = bindingContext.ValueProvider.GetValue("ConcreteModelType");
-            var type = Type.GetType(
-                (string)typeValue.ConvertTo(typeof(string)),
-                true
-            );
-            var model = Activator.CreateInstance(type);
+            dynamic model;
+            Type type;
+            if (string.IsNullOrEmpty(typeValue.AttemptedValue))
+            {
+                model = new BasicProjectViewModel();
+                type = typeof(BasicProjectViewModel);
+            }
+            else
+            {
+                type = Type.GetType(
+                    (string)typeValue.ConvertTo(typeof(string)),
+                    true
+                );
+                model = Activator.CreateInstance(type);
+            }
             bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, type);
             return model;
         }

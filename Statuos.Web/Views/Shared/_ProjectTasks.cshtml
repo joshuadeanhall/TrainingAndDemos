@@ -1,35 +1,33 @@
-﻿@model IEnumerable<Statuos.Web.Models.TaskViewModel>
+﻿@model ProjectViewModel
 
 <p>
     @using (Html.BeginForm("CreateTaskType", "Task"))
     {
-        @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList, string.Empty)
-        <input type="submit" value="Create" />
+        @Html.Hidden("ProjectId", Model.Id)
+        @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList)
+        <input type="submit" value="Create Task" />
         
     }
 </p>
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectId)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Users
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserNames)
+            Estimated Hours
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstimatedHours)
+            Type
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Tasks) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectId)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
@@ -38,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EstimatedHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskType)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -314,6 +314,8 @@
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
     <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\EditorTemplates\BasicTaskViewModel.cshtml" />
+    <Content Include="Views\Task\EditorTemplates\PhoneRequestTaskViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Statuos.Web.Models.ProjectViewModel>
+﻿@model IEnumerable<ProjectViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
@@ -18,7 +15,7 @@
             @Html.DisplayNameFor(model => model.EstimatedHours)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.DisplayNameFor(model => model.CustomerName)
         </th>
         <th></th>
     </tr>
@@ -32,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.EstimatedHours)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
+            @Html.DisplayFor(modelItem => item.CustomerName)
         </td>
         
         <td>
