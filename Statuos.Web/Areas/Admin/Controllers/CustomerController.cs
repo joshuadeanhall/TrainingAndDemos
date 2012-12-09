@@ -120,8 +120,16 @@ namespace Statuos.Web.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Customer customer = _repository.Find(id);
-            _service.Delete(customer);
-            return RedirectToAction("Index");
+            if (customer.Projects.Count > 0)
+            {
+                ModelState.AddModelError("", "This customer has projects associated with it and can not be deleted");
+            }
+            if (ModelState.IsValid)
+            {
+                _service.Delete(customer);
+                return RedirectToAction("Index");
+            }
+            return View(customer.MapTo<CustomerViewModel>());
         }
 
         protected override void Dispose(bool disposing)

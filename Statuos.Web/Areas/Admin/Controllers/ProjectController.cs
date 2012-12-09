@@ -83,14 +83,19 @@ namespace Statuos.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProjectViewModel projectviewmodel)
         {
+            var project = projectviewmodel.MapTo<Project>();
+            var user = _userRepository.All.Where(u => u.UserName == projectviewmodel.UserName).FirstOrDefault();
+            if (user == null)
+            {
+                ModelState.AddModelError("UserName", "There username entered does not exist in the system");
+            }
             if (ModelState.IsValid)
             {
-                var project = projectviewmodel.MapTo<Project>();
-                project.ProjectManagerId = _userRepository.All.Where(u => u.UserName == projectviewmodel.UserName).FirstOrDefault().Id;
-                _projectService.Add(project);                
+                project.ProjectManagerId = user.Id;
+                _projectService.Add(project);
                 return RedirectToAction("Index");
             }
-            return View(projectviewmodel);
+            return CreateProjectType(projectviewmodel);
         }
 
         //
@@ -149,8 +154,19 @@ namespace Statuos.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            _projectService.Delete(project);
-            return RedirectToAction("Index");
+            ValidateProjectHasNoTasks(project);
+            if (ModelState.IsValid)
+            {
+                _projectService.Delete(project);
+                return RedirectToAction("Index");
+            }
+            return View(project.MapTo<ProjectViewModel>());
+        }
+
+        private void ValidateProjectHasNoTasks(Project project)
+        {
+            if (project.Tasks.Count > 0)
+                ModelState.AddModelError("", "The Project has tasks and can not be deleted");
         }
 
         protected override void Dispose(bool disposing)
