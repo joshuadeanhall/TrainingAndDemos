@@ -11,40 +11,37 @@
 </p>
 <table>
     <tr>
-        <th>
-            Title
+        <th>Title
         </th>
-        <th>
-            Users
+        <th>Users
         </th>
-        <th>
-            Estimated Hours
+        <th>Estimated Hours
         </th>
-        <th>
-            Type
+        <th>Type
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.Tasks) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserNames)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstimatedHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaskType)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Tasks)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskType)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Task", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "Task",  new { id = item.Id }, null)           
+            </td>
+        </tr>
+    }
 
 </table>

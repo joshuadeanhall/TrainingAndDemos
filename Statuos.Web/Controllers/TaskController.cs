@@ -81,7 +81,38 @@ namespace Statuos.Web.Controllers
             _taskService.Add(taskModel);
             return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
         }
-        
+
+
+        public ActionResult Edit(int id = 0)
+        {
+            var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            
+            var task = _taskRepository.Find(id);
+            if (task == null)
+                return HttpNotFound();
+            if (!currentUser.Projects.Any(p => p.Id == task.ProjectId))
+                return HttpNotFound();
+
+            return View(task.MapTo<TaskViewModel>());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(TaskViewModel taskViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var task = taskViewModel.MapTo<Task>();
+                var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+                if (!currentUser.Projects.Any(p => p.Id == taskViewModel.ProjectId))
+                    return HttpNotFound();
+
+                _taskService.Edit(task);
+                return RedirectToAction("Details", "Project", new { id = task.ProjectId });
+
+            }
+            return View(taskViewModel);
+        }
 
         protected override void Dispose(bool disposing)
         {
