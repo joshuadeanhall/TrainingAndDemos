@@ -13,6 +13,7 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
         protected override void Configure()
         {
             Mapper.CreateMap<Task, TaskViewModel>()
+                .ForMember(dest => dest.ProjectTitle, opt => opt.MapFrom(src => src.Project.Title))
                 .Include<BasicTask, BasicTaskViewModel>()
                 .Include<PhoneRequestTask, PhoneRequestTaskViewModel>();
             Mapper.CreateMap<PhoneRequestTask, PhoneRequestTaskViewModel>();

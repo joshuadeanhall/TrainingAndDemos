@@ -20,7 +20,7 @@
     <div class="display-label" id="project-customer">
          @Html.DisplayNameFor(model => model.CustomerName): @Html.DisplayFor(model => model.CustomerName) 
     </div>
-
+    @Html.DisplayForModel()
 </fieldset>
 <!-- In future change to Render Action or AJAX -->
 @{ Html.RenderPartial("_ProjectTasks", Model); }

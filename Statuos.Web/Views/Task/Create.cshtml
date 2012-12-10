@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm("Create", "Task")) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary()
     @Html.EditorFor(model => model.ConcreteModelType)
     <fieldset>
         <legend>TaskViewModel</legend>

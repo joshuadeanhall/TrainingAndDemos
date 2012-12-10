@@ -10,6 +10,7 @@ namespace Statuos.Web.Models
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
+        public string ProjectTitle { get; set; }
         public string Title { get; set; }
         public string UserNames { get; set; }
         public decimal EstimatedHours { get; set; }

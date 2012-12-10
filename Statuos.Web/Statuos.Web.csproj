@@ -254,8 +254,6 @@
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Project\DisplayTemplates\BasicProjectViewModel.cshtml" />
-    <Content Include="Areas\Admin\Views\Project\DisplayTemplates\MaxHoursProjectViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\statuos.pubxml" />
@@ -319,9 +317,12 @@
     <Content Include="Views\Task\Edit.cshtml" />
     <Content Include="Views\Task\DisplayTemplates\BasicTaskViewModel.cshtml" />
     <Content Include="Views\Task\DisplayTemplates\PhoneRequestTaskViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BasicProjectViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MaxHoursProjectViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Project\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Statous.Domain\Statuos.Domain.csproj">

@@ -65,21 +65,38 @@ namespace Statuos.Web.Controllers
         {            
             var taskModel = task.MapTo<Task>();
             //TODO Verify user is manager of project 
+
             var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            
             var isProjectManager = currentUser.Projects.Any(p => p.Id == task.ProjectId);
             if (!isProjectManager)
             {
                 return HttpNotFound();
             }
             var userNames = task.UserNames.Split(';');
-            taskModel.Users = new List<User>();
-            foreach(var userName in userNames)
+            taskModel.Users = GetUsers(taskModel, userNames);
+
+            if (ModelState.IsValid)
+            {
+                _taskService.Add(taskModel);
+                return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
+            }
+            return View(task);
+        }
+
+        private List<User> GetUsers(Task taskModel, string[] userNames)
+        {
+            var users = new List<User>();
+            foreach (var userName in userNames)
             {
                 var user = _userRepository.All.Where(u => u.UserName == userName).FirstOrDefault();
-                taskModel.Users.Add(user);
+                if (user == null)
+                {
+                    ModelState.AddModelError("UserNames", string.Format("User {0} does not exist in the system", userName));
+                }
+                users.Add(user);
             }
-            _taskService.Add(taskModel);
-            return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
+            return users;
         }
 
 
