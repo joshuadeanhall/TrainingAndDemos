@@ -120,8 +120,21 @@ namespace Statuos.Web.Areas.Admin.Controllers
             if (user == null)
                 return HttpNotFound();
 
-            _userService.Delete(user);
-            return RedirectToAction("Index");
+            VerifyUserCanBeDeleted(user);
+            if (ModelState.IsValid)
+            {
+                _userService.Delete(user);
+                return RedirectToAction("Index");
+            }
+            return View(user.MapTo<UserViewModel>());
+        }
+
+        private void VerifyUserCanBeDeleted(User user)
+        {
+            if (user.Tasks.Count > 0 || user.Projects.Count > 0)
+            {
+                ModelState.AddModelError("", "User can not be deleted because the user is assigned to tasks or is a PM");
+            }
         }
 
         protected override void Dispose(bool disposing)

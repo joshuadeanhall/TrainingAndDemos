@@ -25,6 +25,7 @@ namespace Statuos.Test.Controllers
         private Mock<IRepository<Task>> taskRepository;
         private Mock<ITaskService> taskService;
         private Mock<IRepository<User>> userRepository;
+        private Mock<IRepository<Project>> projectRepository;
         private int invalidTaskId = 11;
         private int validTaskId = 1;
         private Task validTask;
@@ -49,7 +50,7 @@ namespace Statuos.Test.Controllers
                         } 
                     } 
                 }.AsQueryable();
-            invalidTaskViewModel = new BasicTaskViewModel() { EstimatedHours = 3.00M, Id = 1, ProjectId = 11, Title = "TaskTitle" };
+            invalidTaskViewModel = new BasicTaskViewModel() { EstimatedHours = 3.00M, Id = 1, Project = new TaskViewModel.ProjectDetails() { Id = 11 }, Title = "TaskTitle" };
             validTask = new BasicTask() { Id = validTaskId, EstimatedHours = 3.00M, ProjectId = 1, Title = "Task Title", Users = users.ToList() };
             validTaskViewModel = (BasicTaskViewModel)Mapper.Map(validTask, validTask.GetType(), typeof(TaskViewModel));
             var tasks = new List<Task>() { validTask  }.AsQueryable();
@@ -59,9 +60,10 @@ namespace Statuos.Test.Controllers
             taskRepository.Setup(t => t.Find(validTaskId)).Returns(validTask);
             taskService = new Mock<ITaskService>();
             userRepository = new Mock<IRepository<User>>();
+            projectRepository = new Mock<IRepository<Project>>();
 
             userRepository.Setup(u => u.All).Returns(users);
-            controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object);
+            controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object);
             
             SetupControllerContext();
         }

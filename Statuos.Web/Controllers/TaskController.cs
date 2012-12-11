@@ -19,14 +19,15 @@ namespace Statuos.Web.Controllers
         private IRepository<Task> _taskRepository;
         private ITaskService _taskService;
         private IRepository<User> _userRepository;
-        
+        private IRepository<Project> _projectRepository;
 
 
-        public TaskController(IRepository<Task> taskRepository, ITaskService taskService, IRepository<User> userRepository)
+        public TaskController(IRepository<Task> taskRepository, ITaskService taskService, IRepository<User> userRepository, IRepository<Project> projectRepository)
         {
             _taskRepository = taskRepository;
             _taskService = taskService;
             _userRepository = userRepository;
+            _projectRepository = projectRepository;
         }
         //
         // GET: /Task/
@@ -44,14 +45,16 @@ namespace Statuos.Web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Task ta = _taskRepository.All.Where(t => t.Id == id).FirstOrDefault();
+            //TODO user is assigned to or is project manager
             Task task = _taskRepository.All.Where(t => t.Id == id).UserIsAssignedToTaskQuery(User.Identity.Name).FirstOrDefault();
             
             if (task == null)
             {
                 return HttpNotFound();
             }
-            return View(task.MapTo<TaskViewModel>());
+            var taskViewModel = task.MapTo<TaskViewModel>();
+            taskViewModel.Project = task.Project.MapTo<TaskViewModel.ProjectDetails>();
+            return View(taskViewModel);
         }
 
         public ActionResult CreateTaskType(TaskViewModel task)
@@ -62,18 +65,14 @@ namespace Statuos.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TaskViewModel task)
-        {            
-            var taskModel = task.MapTo<Task>();
-            //TODO Verify user is manager of project 
-
-            var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            
-            var isProjectManager = currentUser.Projects.Any(p => p.Id == task.ProjectId);
-            if (!isProjectManager)
+        {    
+            var project = _projectRepository.Find(task.Project.Id);
+            if (project == null || project.ProjectManager.UserName != User.Identity.Name)
             {
-                return HttpNotFound();
+                return HttpNotFound("Project Id not found or you are not the PM");
             }
             var userNames = task.UserNames.Split(';');
+            var taskModel = task.MapTo<Task>();   
             taskModel.Users = GetUsers(taskModel, userNames);
 
             if (ModelState.IsValid)
@@ -117,11 +116,12 @@ namespace Statuos.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TaskViewModel taskViewModel)
         {
+            VerifyProjectId(taskViewModel);
             if (ModelState.IsValid)
             {
                 var task = taskViewModel.MapTo<Task>();
                 var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-                if (!currentUser.Projects.Any(p => p.Id == taskViewModel.ProjectId))
+                if (!currentUser.Projects.Any(p => p.Id == taskViewModel.Project.Id))
                     return HttpNotFound();
 
                 _taskService.Edit(task);
@@ -129,6 +129,15 @@ namespace Statuos.Web.Controllers
 
             }
             return View(taskViewModel);
+        }
+
+        private void VerifyProjectId(TaskViewModel taskViewModel)
+        {
+            var originalTask = _taskRepository.Find(taskViewModel.Id);
+            if (originalTask.Id != taskViewModel.Project.Id)
+            {
+                ModelState.AddModelError("ProjectId", "You can not change Project Id of a task");
+            }
         }
 
         protected override void Dispose(bool disposing)

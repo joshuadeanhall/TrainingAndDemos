@@ -9,6 +9,7 @@ namespace Statuos.Domain
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public bool IsActive { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
     }

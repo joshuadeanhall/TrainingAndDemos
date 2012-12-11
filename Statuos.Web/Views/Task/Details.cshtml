@@ -10,10 +10,22 @@
     <legend>Task</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ProjectTitle)
+         @Html.DisplayNameFor(model => model.Project.Title)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ProjectTitle)
+        @Html.DisplayFor(model => model.Project.Title)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Project.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.CustomerName)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Project.Manager)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.Manager)
     </div>
 
     <div class="display-label">
