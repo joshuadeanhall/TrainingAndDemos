@@ -61,6 +61,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.IsActive = true;
                 _userService.Add(user.MapTo<User>());
                 return RedirectToAction("Index");
             }

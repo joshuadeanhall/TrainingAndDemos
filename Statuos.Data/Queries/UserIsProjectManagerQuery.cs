@@ -11,8 +11,7 @@ namespace Statuos.Data.Queries
     {
         public static IQueryable<Project> UserIsProjectManagerQuery(this IQueryable<Project> projects,string userName)
         {
-            return projects.Where(p => p.ProjectManager.UserName == userName);
-            
+            return projects.Where(p => p.ProjectManager.UserName == userName && p.ProjectManager.IsActive);            
         }
     }
 }

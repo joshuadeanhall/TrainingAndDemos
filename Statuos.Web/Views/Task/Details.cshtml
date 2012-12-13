@@ -34,14 +34,7 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.UserNames)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.UserNames)
-    </div>
-
+    
     <div class="display-label">
          @Html.DisplayNameFor(model => model.EstimatedHours)
     </div>
@@ -50,6 +43,8 @@
     </div>
     @Html.DisplayForModel()
 </fieldset>
+
+@Html.Partial("_AssignedToUsers")
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

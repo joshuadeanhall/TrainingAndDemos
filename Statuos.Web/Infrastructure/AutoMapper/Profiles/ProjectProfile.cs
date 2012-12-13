@@ -13,12 +13,6 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
     {
         protected override void Configure()
         {
-            
-            //Mapper.CreateMap<Project, ProjectType>()
-            //    .ForMember(x => x.ClassName, o => o.MapFrom(m => m.ProjectTypeDescription))
-            //    .ForMember(x => x.Title, o => o.MapFrom(m => m.GetType()));
-            //Mapper.CreateMap<Project, ProjectViewModel>()
-            //    .ForMember(x => x.ProjectType, o => o.MapFrom(m => m.ProjectTypeDescription));
             Mapper.CreateMap<Project, ProjectViewModel>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.ProjectManager.UserName))  
                 .ForMember(dest => dest.CustomerName,opt => opt.MapFrom(src => src.Customer.Name))

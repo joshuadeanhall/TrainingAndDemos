@@ -10,7 +10,8 @@ namespace Statuos.Data.Queries
     {
         public static IQueryable<Task> UserIsAssignedToTaskQuery(this IQueryable<Task> tasks, string userName)
         {
-            return tasks.Where(t => t.Users.Any(u => u.UserName == userName));
+            //User is assigned to task and is an active user or user is project manager of task and is an active user
+            return tasks.Where(t => t.Users.Any(u => u.UserName == userName && u.IsActive) || (t.Project.ProjectManager.UserName == userName && t.Project.ProjectManager.IsActive));
         }
     }
 }

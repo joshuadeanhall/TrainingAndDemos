@@ -3,7 +3,7 @@
 <p>
     @using (Html.BeginForm("CreateTaskType", "Task"))
     {
-        @Html.Hidden("ProjectId", Model.Id)
+        @Html.Hidden("Project.Id", Model.Id)
         @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList)
         <input type="submit" value="Create Task" />
         

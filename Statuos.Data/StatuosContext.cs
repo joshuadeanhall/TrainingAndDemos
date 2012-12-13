@@ -40,6 +40,17 @@ namespace Statuos.Data
                 .HasForeignKey(t => t.ProjectId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<User>().Property(u => u.UserName).IsRequired();
+            //Default value for isactive
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Projects)
+                .WithRequired(p => p.ProjectManager)
+                .HasForeignKey(p => p.ProjectManagerId);
+
+               
+               
 
         }
 

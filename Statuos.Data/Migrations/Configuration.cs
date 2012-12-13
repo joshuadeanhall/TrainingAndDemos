@@ -28,7 +28,7 @@ namespace Statuos.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            var user1 = new User { Id = 1, UserName = @"HOME\jdhall" };
+            var user1 = new User { Id = 1, UserName = @"HOME\jdhall", IsActive=true };
             List<User> users = new List<User>();
             users.Add(user1);
             context.Users.AddOrUpdate(

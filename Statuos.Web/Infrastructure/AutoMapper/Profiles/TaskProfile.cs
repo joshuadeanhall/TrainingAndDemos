@@ -19,16 +19,19 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
             Mapper.CreateMap<PhoneRequestTask, PhoneRequestTaskViewModel>();
             Mapper.CreateMap<BasicTask, BasicTaskViewModel>();
 
-            Mapper.CreateMap<TaskViewModel, Task>()
+            Mapper.CreateMap<TaskViewModel, Task>()            
                 .Include<BasicTaskViewModel, BasicTask>()
                 .Include<PhoneRequestTaskViewModel, PhoneRequestTask>();
-            Mapper.CreateMap<PhoneRequestTaskViewModel, PhoneRequestTask>();
-            Mapper.CreateMap<BasicTaskViewModel, BasicTask>();
+
+            Mapper.CreateMap<PhoneRequestTaskViewModel, PhoneRequestTask>()
+                .ForMember(dest => dest.Project, opt => opt.Ignore());
+            Mapper.CreateMap<BasicTaskViewModel, BasicTask>()
+                .ForMember(dest => dest.Project, opt => opt.Ignore());
 
             Mapper.CreateMap<Project, TaskViewModel.ProjectDetails>()
                 .ForMember(dest => dest.Manager, opt => opt.MapFrom(src => src.ProjectManager.UserName))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name));
-                   
+
         }
     }
 }

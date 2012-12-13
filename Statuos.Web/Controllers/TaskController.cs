@@ -119,7 +119,10 @@ namespace Statuos.Web.Controllers
             VerifyProjectId(taskViewModel);
             if (ModelState.IsValid)
             {
-                var task = taskViewModel.MapTo<Task>();
+                //var task = taskViewModel.MapTo<Task>();
+                var task = _taskRepository.Find(taskViewModel.Id);
+                task.Title = taskViewModel.Title;
+                task.EstimatedHours = taskViewModel.EstimatedHours;
                 var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
                 if (!currentUser.Projects.Any(p => p.Id == taskViewModel.Project.Id))
                     return HttpNotFound();
@@ -134,7 +137,7 @@ namespace Statuos.Web.Controllers
         private void VerifyProjectId(TaskViewModel taskViewModel)
         {
             var originalTask = _taskRepository.Find(taskViewModel.Id);
-            if (originalTask.Id != taskViewModel.Project.Id)
+            if (originalTask.ProjectId != taskViewModel.Project.Id)
             {
                 ModelState.AddModelError("ProjectId", "You can not change Project Id of a task");
             }

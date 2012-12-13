@@ -26,4 +26,5 @@ namespace Statuos.Web.Models
             public decimal EstimatedHours { get; set; }
         }
     }
+
 }

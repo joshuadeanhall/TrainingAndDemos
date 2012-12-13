@@ -8,13 +8,13 @@
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary()
     @Html.HiddenFor(model => model.ConcreteModelType)
     <fieldset>
         <legend>TaskViewModel</legend>
 
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.Project.Id)
         
 
         <div class="editor-label">

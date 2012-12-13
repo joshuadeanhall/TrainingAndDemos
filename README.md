@@ -1,9 +1,18 @@
 statuos
 =======
 
+
 Statuos is a project/task management system. 
 
 Statuos was moved from tfs to github to make the code public and to move maintance of the server to another party (Also to learn about git(hub))
+
+Development tasks are
+-Fix current bugs
+-Mark Task Complete
+-Mark Project Complete
+-Charge Hours to Project  (Will be ready for use at this point)
+-Display graph showing charges over time for a task and for a project
+-Improve UI with AJAX and general UI enchancements
 
 Statuos uses the following technologies.
 
