@@ -13,7 +13,6 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
         protected override void Configure()
         {
             Mapper.CreateMap<Task, TaskViewModel>()
-                .ForMember(dest => dest.Project, opt => opt.Ignore())
                 .Include<BasicTask, BasicTaskViewModel>()
                 .Include<PhoneRequestTask, PhoneRequestTaskViewModel>();
             Mapper.CreateMap<PhoneRequestTask, PhoneRequestTaskViewModel>();
@@ -31,6 +30,13 @@ namespace Statuos.Web.Infrastructure.AutoMapper.Profiles
             Mapper.CreateMap<Project, TaskViewModel.ProjectDetails>()
                 .ForMember(dest => dest.Manager, opt => opt.MapFrom(src => src.ProjectManager.UserName))
                 .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.Name));
+
+            Mapper.CreateMap<User, TaskViewModel.UserDetails>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.UserName));
+
+            Mapper.CreateMap<Task, TaskUserViewModel>()
+                .ForMember(dest => dest.TaskId, opt => opt.MapFrom(src => src.Id));
 
         }
     }

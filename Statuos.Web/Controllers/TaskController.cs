@@ -53,13 +53,32 @@ namespace Statuos.Web.Controllers
                 return HttpNotFound();
             }
             var taskViewModel = task.MapTo<TaskViewModel>();
-            taskViewModel.Project = task.Project.MapTo<TaskViewModel.ProjectDetails>();
+            //taskViewModel.Project = task.Project.MapTo<TaskViewModel.ProjectDetails>();
             return View(taskViewModel);
         }
 
         public ActionResult CreateTaskType(TaskViewModel task)
         {
             return View("Create", task);
+        }
+
+        public ActionResult AddUser(int id = 0)
+        {
+            var task = _taskRepository.Find(id);
+            return View(task.MapTo<TaskUserViewModel>());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUser(TaskUserViewModel taskUserViewModel)
+        {
+            //TODO Add validation for user is PM of project
+            User user = _userRepository.All.Where(u => u.UserName == taskUserViewModel.UserName).FirstOrDefault();
+            Task task = _taskRepository.Find(taskUserViewModel.TaskId);
+            task.Users.Add(user);
+            _taskService.Edit(task);
+            return RedirectToAction("Index");
+            
         }
 
         [HttpPost]

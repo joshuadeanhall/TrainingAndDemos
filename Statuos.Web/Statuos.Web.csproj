@@ -148,6 +148,7 @@
     <Compile Include="Models\BasicProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerViewModel.cs" />
     <Compile Include="Models\MaxHoursProjectViewModel.cs" />
+    <Compile Include="Models\TaskUserViewModel.cs" />
     <Compile Include="Models\TypeViewModel.cs" />
     <Compile Include="Models\PhoneRequestTaskViewModel.cs" />
     <Compile Include="Models\ProjectViewModel.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Shared\DisplayTemplates\BasicProjectViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MaxHoursProjectViewModel.cshtml" />
     <Content Include="Views\Task\_AssignedToUsers.cshtml" />
+    <Content Include="Views\Task\AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,33 +10,33 @@
     <legend>Task</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Project.Title)
+        @Html.DisplayNameFor(model => model.Project.Title)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Project.Title)
     </div>
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Project.CustomerName)
+        @Html.DisplayNameFor(model => model.Project.CustomerName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Project.CustomerName)
     </div>
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Project.Manager)
+        @Html.DisplayNameFor(model => model.Project.Manager)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Project.Manager)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.Title)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
-    
+
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.EstimatedHours)
+        @Html.DisplayNameFor(model => model.EstimatedHours)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.EstimatedHours)
@@ -44,8 +44,11 @@
     @Html.DisplayForModel()
 </fieldset>
 
-@Html.Partial("_AssignedToUsers")
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Assign New User", "AddUser", new { id = Model.Id })
+</p>
+@Html.Partial("_AssignedToUsers", Model.Users)
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

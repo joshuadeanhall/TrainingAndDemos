@@ -14,9 +14,15 @@ namespace Statuos.Web.Models
         public decimal EstimatedHours { get; set; }
         public abstract string TaskType { get; }
         public ProjectDetails Project { get; set; }
+        public List<UserDetails> Users { get; set; }
         [HiddenInput(DisplayValue = false)]
         public string ConcreteModelType { get { return this.GetType().ToString(); } }
 
+        public class UserDetails
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
         public class ProjectDetails
         {
             public int Id { get; set; }
