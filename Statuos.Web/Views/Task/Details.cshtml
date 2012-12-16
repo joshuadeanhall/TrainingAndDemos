@@ -1,9 +1,9 @@
-﻿@model Statuos.Web.Models.TaskViewModel
+﻿@model TaskViewModel
 
 @{
     ViewBag.Title = "Details";
 }
-
+@Html.Partial("_ProjectLink") <br />
 <h2>Details</h2>
 
 <fieldset>
@@ -47,8 +47,8 @@
 <p>
     @Html.ActionLink("Assign New User", "AddUser", new { id = Model.Id })
 </p>
-@Html.Partial("_AssignedToUsers", Model.Users)
+@Html.Partial("_AssignedToUsers")
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") 
 </p>

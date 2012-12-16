@@ -321,6 +321,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MaxHoursProjectViewModel.cshtml" />
     <Content Include="Views\Task\_AssignedToUsers.cshtml" />
     <Content Include="Views\Task\AddUser.cshtml" />
+    <Content Include="Views\Task\_ProjectLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

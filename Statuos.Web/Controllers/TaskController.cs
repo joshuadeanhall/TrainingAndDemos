@@ -35,7 +35,7 @@ namespace Statuos.Web.Controllers
         public ActionResult Index()
         {
             //TODO clean this up would prefer to do this based on username and not on actually passing a user
-            
+
             var tasks = _taskRepository.All.UserIsAssignedToTaskQuery(User.Identity.Name);
             return View(tasks.ToList().MapTo<TaskViewModel>());
         }
@@ -47,7 +47,7 @@ namespace Statuos.Web.Controllers
         {
             //TODO user is assigned to or is project manager
             Task task = _taskRepository.All.Where(t => t.Id == id).UserIsAssignedToTaskQuery(User.Identity.Name).FirstOrDefault();
-            
+
             if (task == null)
             {
                 return HttpNotFound();
@@ -72,26 +72,34 @@ namespace Statuos.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddUser(TaskUserViewModel taskUserViewModel)
         {
-            //TODO Add validation for user is PM of project
-            User user = _userRepository.All.Where(u => u.UserName == taskUserViewModel.UserName).FirstOrDefault();
             Task task = _taskRepository.Find(taskUserViewModel.TaskId);
-            task.Users.Add(user);
-            _taskService.Edit(task);
-            return RedirectToAction("Index");
-            
+            if (task == null)
+                return HttpNotFound();
+
+            if (task.Project.ProjectManager.UserName != User.Identity.Name)
+                return HttpNotFound();
+            if (ModelState.IsValid)
+            {
+                User user = _userRepository.All.Where(u => u.UserName == taskUserViewModel.UserName).FirstOrDefault();
+
+                task.Users.Add(user);
+                _taskService.Edit(task);
+                return RedirectToAction("Details", new { id = task.Id });
+            }
+            return View(taskUserViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TaskViewModel task)
-        {    
+        {
             var project = _projectRepository.Find(task.Project.Id);
             if (project == null || project.ProjectManager.UserName != User.Identity.Name)
             {
                 return HttpNotFound("Project Id not found or you are not the PM");
             }
             var userNames = task.UserNames.Split(';');
-            var taskModel = task.MapTo<Task>();   
+            var taskModel = task.MapTo<Task>();
             taskModel.Users = GetUsers(taskModel, userNames);
 
             if (ModelState.IsValid)
@@ -100,6 +108,21 @@ namespace Statuos.Web.Controllers
                 return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
             }
             return View(task);
+        }
+
+        //This is not a post and should be converted to using post in the future.  Doing a confirm delete page would be a simple way to accomplish this.
+        public ActionResult DeleteUser(int taskId, int userId)
+        {
+            var task = _taskRepository.Find(taskId);
+            var user = _userRepository.Find(userId);
+            //Task and user exists and the current user is the project manager oterwise return not found.
+            if (task == null || user == null || task.Project.ProjectManager.UserName != User.Identity.Name)
+            {
+                return HttpNotFound();
+            }
+
+            _taskService.DeleteAssignedUser(task, user);
+            return RedirectToAction("Details", new { id = taskId });
         }
 
         private List<User> GetUsers(Task taskModel, string[] userNames)
@@ -121,7 +144,7 @@ namespace Statuos.Web.Controllers
         public ActionResult Edit(int id = 0)
         {
             var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            
+
             var task = _taskRepository.Find(id);
             if (task == null)
                 return HttpNotFound();

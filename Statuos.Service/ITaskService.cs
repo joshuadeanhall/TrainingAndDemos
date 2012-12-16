@@ -8,5 +8,6 @@ namespace Statuos.Service
 {
     public interface ITaskService : IBaseService<Task>
     {
+        void DeleteAssignedUser(Task task, User user);
     }
 }

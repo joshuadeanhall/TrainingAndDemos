@@ -1,23 +1,21 @@
-﻿@model IEnumerable<Statuos.Web.Models.TaskViewModel.UserDetails>
+﻿@model TaskViewModel
 
 
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            User
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Users) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "DeleteUser", new { taskId=Model.Id, userId = item.Id  })
         </td>
     </tr>
 }
