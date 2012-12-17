@@ -17,6 +17,7 @@ namespace Statuos.Domain
         public virtual User ProjectManager { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ProjectCompletedDetails CompletedDetails { get; set; }
         [NotMapped]
         public abstract string ProjectTypeDescription { get; }
 

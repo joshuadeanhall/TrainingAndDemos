@@ -27,25 +27,33 @@ namespace Statuos.Data.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
-            var user1 = new User { Id = 1, UserName = @"HOME\jdhall", IsActive=true };
+            ////
+            var user1 = new User { Id = 1, UserName = @"HOME\jdhall", IsActive = true };
             List<User> users = new List<User>();
             users.Add(user1);
             context.Users.AddOrUpdate(
-                user1,
+                new User { Id = 1, UserName = @"HOME\jdhall", IsActive = true },
                 new User { Id = 2, UserName = "imosley" }
                     );
 
 
             context.Customers.AddOrUpdate(
-                new Customer { Id=1, Code = "MIC", Name = "Microsoft" },
-                new Customer { Id=2,  Code = "Hos", Name = "Hostees" }
+                new Customer { Id = 1, Code = "MIC", Name = "Microsoft" },
+                new Customer { Id = 2, Code = "Hos", Name = "Hostees" }
                 );
             context.Projects.AddOrUpdate(
-                new BasicProject {Id=1, EstimatedHours = 2, Title = "PRoject 1", CustomerId = 1, ProjectManagerId = 1 },
-                new MaxHoursProject {Id=2, MaxHours = 1.2M, Title = "Project2", EstimatedHours = 1, CustomerId = 2, ProjectManagerId = 1 }
+                new BasicProject { Id = 1, EstimatedHours = 2, Title = "PRoject 1", CustomerId = 1, ProjectManagerId = 1 },
+                new MaxHoursProject { Id = 2, MaxHours = 1.2M, Title = "Project2", EstimatedHours = 1, CustomerId = 2, ProjectManagerId = 1 }
                     );
-            context.Tasks.Add(new BasicTask() { Id = 1, ProjectId = 1, Title = "Task 1", EstimatedHours = 1, Users = users });
+            context.Tasks.AddOrUpdate(
+                new BasicTask()
+                {
+                    Id = 1,
+                    ProjectId = 1,
+                    Title = "Task 1",
+                    EstimatedHours = 1
+                }
+                    );
         }
     }
 }

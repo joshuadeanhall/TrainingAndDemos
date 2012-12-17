@@ -47,12 +47,15 @@
   <ItemGroup>
     <Compile Include="BasicProject.cs" />
     <Compile Include="BasicTask.cs" />
+    <Compile Include="CompletedDetails.cs" />
     <Compile Include="MaxHoursProject.cs" />
     <Compile Include="PhoneRequestTask.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="ProjectCompletedDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="TaskCompletedDetails.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

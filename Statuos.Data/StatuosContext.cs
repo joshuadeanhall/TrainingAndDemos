@@ -21,15 +21,51 @@ namespace Statuos.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            ConfigureProjects(modelBuilder);
+            ConfigureTasks(modelBuilder);
+            ConfigureUsers(modelBuilder);               
+
+        }
+
+        private static void ConfigureUsers(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<User>().Property(u => u.UserName).IsRequired();
+            //Default value for isactive
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Projects)
+                .WithRequired(p => p.ProjectManager)
+                .HasForeignKey(p => p.ProjectManagerId);
+        }
+
+        private static void ConfigureProjects(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<BasicProject>().ToTable("BasicProject");
             modelBuilder.Entity<MaxHoursProject>().ToTable("MaxHoursProject");
+
+            modelBuilder.Entity<ProjectCompletedDetails>()
+                .HasRequired(c => c.Project)
+                .WithOptional(p => p.CompletedDetails)
+                .WillCascadeOnDelete(false);
+
+            //Think this may only be needed on the abstract class
+            modelBuilder.Entity<ProjectCompletedDetails>()
+                .HasRequired(c => c.CompletedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CompletedById);
+
+        }
+
+        private static void ConfigureTasks(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<BasicTask>().ToTable("BasicTask");
             modelBuilder.Entity<PhoneRequestTask>().ToTable("PhoneRequestTask");
 
-            
-            modelBuilder.Entity<Task>()                
-            .HasMany(t => t.Users)            
-            .WithMany(u => u.Tasks)            
+
+            modelBuilder.Entity<Task>()
+            .HasMany(t => t.Users)
+            .WithMany(u => u.Tasks)
             .Map(m => m.MapLeftKey("TaskId")
                    .MapRightKey("UserId")
                    .ToTable("TaskUser"));
@@ -40,17 +76,15 @@ namespace Statuos.Data
                 .HasForeignKey(t => t.ProjectId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
-            modelBuilder.Entity<User>().Property(u => u.UserName).IsRequired();
-            //Default value for isactive
+            modelBuilder.Entity<Task>()
+                .HasOptional(t => t.CompletedDetails)
+                .WithRequired(c => c.Task)
+                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Projects)
-                .WithRequired(p => p.ProjectManager)
-                .HasForeignKey(p => p.ProjectManagerId);
-
-               
-               
+            modelBuilder.Entity<TaskCompletedDetails>()
+                .HasRequired(c => c.CompletedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CompletedById);
 
         }
 
