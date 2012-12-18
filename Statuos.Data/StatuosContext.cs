@@ -21,6 +21,7 @@ namespace Statuos.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //TODO Create sepearte class for each of these.
             ConfigureProjects(modelBuilder);
             ConfigureTasks(modelBuilder);
             ConfigureUsers(modelBuilder);               
@@ -55,6 +56,10 @@ namespace Statuos.Data
                 .WithMany()
                 .HasForeignKey(x => x.CompletedById);
 
+            modelBuilder.Entity<ProjectCompletedDetails>()
+                .HasKey(c => c.ProjectId);
+
+
         }
 
         private static void ConfigureTasks(DbModelBuilder modelBuilder)
@@ -76,15 +81,19 @@ namespace Statuos.Data
                 .HasForeignKey(t => t.ProjectId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Task>()
-                .HasOptional(t => t.CompletedDetails)
-                .WithRequired(c => c.Task)
+
+            modelBuilder.Entity<TaskCompletedDetails>()
+                .HasRequired(c => c.Task)
+                .WithOptional(t => t.CompletedDetails)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaskCompletedDetails>()
                 .HasRequired(c => c.CompletedBy)
                 .WithMany()
                 .HasForeignKey(x => x.CompletedById);
+
+            modelBuilder.Entity<TaskCompletedDetails>()
+                .HasKey(c => c.TaskId);
 
         }
 

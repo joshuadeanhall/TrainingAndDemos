@@ -10,17 +10,19 @@
     <legend>Project</legend>
 
     <div class="display-label" id="project-title">
-         @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
     </div>
 
     <div class="display-label" id="project-estimatedhours">
-         @Html.DisplayNameFor(model => model.EstimatedHours): @Html.DisplayFor(model => model.EstimatedHours)
+        @Html.DisplayNameFor(model => model.EstimatedHours): @Html.DisplayFor(model => model.EstimatedHours)
     </div>
 
     <div class="display-label" id="project-customer">
-         @Html.DisplayNameFor(model => model.CustomerName): @Html.DisplayFor(model => model.CustomerName) 
+        @Html.DisplayNameFor(model => model.CustomerName): @Html.DisplayFor(model => model.CustomerName)
     </div>
     @Html.DisplayForModel()
+
+    @Html.ActionLink("Mark Complete", "CompleteProject", new { id = Model.Id })
 </fieldset>
 <!-- In future change to Render Action or AJAX -->
 @{ Html.RenderPartial("_ProjectTasks", Model); }

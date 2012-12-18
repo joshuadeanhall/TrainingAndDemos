@@ -19,11 +19,13 @@ namespace Statuos.Web.Controllers
     {
         private IRepository<Project> _projectRepository;
         private IProjectService _projectService;
+        private IRepository<User> _userRepository;
 
-        public ProjectController(IRepository<Project> projectRepository, IProjectService projectService)
+        public ProjectController(IRepository<Project> projectRepository, IProjectService projectService, IRepository<User> userRepository)
         {
             _projectRepository = projectRepository;
             _projectService = projectService;
+            _userRepository = userRepository;
         }
         //
         // GET: /Project/
@@ -54,7 +56,22 @@ namespace Statuos.Web.Controllers
         {
             ViewBag.TaskTypes = new SelectList(TypeHelper.GetTypes<TaskViewModel>(), "Type", "Name");
         }
-        
+
+        public ActionResult CompleteProject(int id = 0)
+        {
+            var project = _projectRepository.Find(id);
+            var user = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            var completionDetails = new ProjectCompletedDetails() { CompletedById = user.Id, CompletedOn = DateTime.Now, ProjectId = project.Id };
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            project.MarkComplete(completionDetails);
+            _projectService.Edit(project);
+            return RedirectToAction("Index");
+            
+
+        }
 
         protected override void Dispose(bool disposing)
         {

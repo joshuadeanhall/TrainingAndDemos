@@ -24,6 +24,7 @@ namespace Statuos.Test.Controllers
         private ProjectController controller;
         private Mock<IRepository<Project>> projectRepository;
         private Mock<IProjectService> projectService;
+        private Mock<IRepository<User>> userRepository;
         private int invalidProjectId = 11;
         private int validProjectId = 1;
         private Project project;
@@ -36,12 +37,13 @@ namespace Statuos.Test.Controllers
             Mapper.AddProfile(new CustomerProfile());
             Mapper.AddProfile(new ProjectProfile());
             Mapper.AddProfile(new TaskProfile());
+            userRepository = new Mock<IRepository<User>>();
             var projectManager = new User() { Id = 1, UserName = "jdhall" };
             var projects = new List<Project>() { new BasicProject() { Id = validProjectId, CustomerId = 1, Title = "Project 1", ProjectManager = projectManager } }.AsQueryable();
             projectRepository = new Mock<IRepository<Project>>();
             projectRepository.Setup(p => p.All).Returns(projects);
             projectService = new Mock<IProjectService>();
-            controller = new ProjectController(projectRepository.Object, projectService.Object);
+            controller = new ProjectController(projectRepository.Object, projectService.Object, userRepository.Object);
 
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity.Name).Returns("jdhall");

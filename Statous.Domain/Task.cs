@@ -14,5 +14,11 @@ namespace Statuos.Domain
         public virtual ICollection<User> Users { get; set; }
         public virtual TaskCompletedDetails CompletedDetails { get; set; }
         public decimal EstimatedHours { get; set; }
+
+        public void MarkComplete(TaskCompletedDetails taskCompletedDetails)
+        {
+            CompletedDetails = taskCompletedDetails;
+        }
     }
+
 }
