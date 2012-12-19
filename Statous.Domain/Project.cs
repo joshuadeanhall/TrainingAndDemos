@@ -18,18 +18,18 @@ namespace Statuos.Domain
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         public virtual ProjectCompletedDetails CompletedDetails { get; set; }
-        public int CompletedDetailsId { get; set; }
-        [NotMapped]
         public abstract string ProjectTypeDescription { get; }
 
 
         public virtual void MarkComplete(ProjectCompletedDetails projectCompletionDetails)
         {
-            
+            if (CompletedDetails != null)
+            {
+                return;
+            }
             foreach (var task in Tasks)
             {
-                TaskCompletedDetails taskCompletedDetails = new TaskCompletedDetails() { CompletedById = ProjectManagerId, CompletedOn = DateTime.Now, TaskId = task.Id };
-                task.MarkComplete(taskCompletedDetails);
+                task.MarkComplete(ProjectManager);
             }
             CompletedDetails = projectCompletionDetails;
         }

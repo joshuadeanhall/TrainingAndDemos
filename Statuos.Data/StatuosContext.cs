@@ -50,6 +50,8 @@ namespace Statuos.Data
                 .WithOptional(p => p.CompletedDetails)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Project>().Ignore(p => p.ProjectTypeDescription);
+
             //Think this may only be needed on the abstract class
             modelBuilder.Entity<ProjectCompletedDetails>()
                 .HasRequired(c => c.CompletedBy)

@@ -15,9 +15,19 @@ namespace Statuos.Domain
         public virtual TaskCompletedDetails CompletedDetails { get; set; }
         public decimal EstimatedHours { get; set; }
 
-        public void MarkComplete(TaskCompletedDetails taskCompletedDetails)
+        public void MarkComplete(User user)
         {
+            if (CompletedDetails != null)
+            {
+                return;
+            }
+            var taskCompletedDetails = new TaskCompletedDetails() { Task = this, CompletedOn = DateTime.Now, CompletedBy = user };
             CompletedDetails = taskCompletedDetails;
+        }
+
+        public bool UserIsAssignedTo(User user)
+        {
+            return this.Users.Any(u => u.UserName == user.UserName) || this.Project.ProjectManager.UserName == user.UserName;
         }
     }
 

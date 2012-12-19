@@ -176,6 +176,18 @@ namespace Statuos.Web.Controllers
             return View(taskViewModel);
         }
 
+        public ActionResult CompleteTask(int id = 0)
+        {
+            var task = _taskRepository.Find(id);
+            var user = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (task == null || user == null || !task.UserIsAssignedTo(user))
+                return HttpNotFound();
+            
+            task.MarkComplete(user);
+            _taskService.Edit(task);
+            return RedirectToAction("Details", new { id = task.Id }); 
+        }
+
         private void VerifyProjectId(TaskViewModel taskViewModel)
         {
             var originalTask = _taskRepository.Find(taskViewModel.Id);
