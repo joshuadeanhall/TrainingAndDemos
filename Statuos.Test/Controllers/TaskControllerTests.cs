@@ -26,6 +26,7 @@ namespace Statuos.Test.Controllers
         private Mock<ITaskService> taskService;
         private Mock<IRepository<User>> userRepository;
         private Mock<IRepository<Project>> projectRepository;
+        private Mock<IProjectService> projectService;
         private int invalidTaskId = 11;
         private int validTaskId = 1;
         private Task validTask;
@@ -58,12 +59,13 @@ namespace Statuos.Test.Controllers
             taskRepository.Setup(t => t.All).Returns(tasks);
             taskRepository.Setup(t => t.Find(invalidTaskId)).Returns((Task)null);
             taskRepository.Setup(t => t.Find(validTaskId)).Returns(validTask);
+            projectService = new Mock<IProjectService>();
             taskService = new Mock<ITaskService>();
             userRepository = new Mock<IRepository<User>>();
             projectRepository = new Mock<IRepository<Project>>();
 
             userRepository.Setup(u => u.All).Returns(users);
-            controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object);
+            controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object, projectService.Object);
             
             SetupControllerContext();
         }

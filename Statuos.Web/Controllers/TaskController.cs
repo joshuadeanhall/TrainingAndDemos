@@ -20,14 +20,17 @@ namespace Statuos.Web.Controllers
         private ITaskService _taskService;
         private IRepository<User> _userRepository;
         private IRepository<Project> _projectRepository;
+        private IProjectService _projectService;
 
-
-        public TaskController(IRepository<Task> taskRepository, ITaskService taskService, IRepository<User> userRepository, IRepository<Project> projectRepository)
+        //I started with the goal of seperating the code into repositories and services and this appears to be the result of that abstraction.  I could have just been passing in a 
+        //IDbContext and using that instead of all these service and repositories
+        public TaskController(IRepository<Task> taskRepository, ITaskService taskService, IRepository<User> userRepository, IRepository<Project> projectRepository, IProjectService projectService)
         {
             _taskRepository = taskRepository;
             _taskService = taskService;
             _userRepository = userRepository;
             _projectRepository = projectRepository;
+            _projectService = projectService;
         }
         //
         // GET: /Task/
@@ -104,7 +107,8 @@ namespace Statuos.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                _taskService.Add(taskModel);
+                project.AddTask(taskModel);
+                _projectService.Edit(project);
                 return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
             }
             return View(task);
