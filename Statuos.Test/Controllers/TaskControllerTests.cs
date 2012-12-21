@@ -54,7 +54,7 @@ namespace Statuos.Test.Controllers
             invalidTaskViewModel = new BasicTaskViewModel() { EstimatedHours = 3.00M, Id = 1, Project = new TaskViewModel.ProjectDetails() { Id = 11 }, Title = "TaskTitle" };
             validTask = new BasicTask() { Id = validTaskId, EstimatedHours = 3.00M, ProjectId = 1, Title = "Task Title", Users = users.ToList() };
             validTaskViewModel = (BasicTaskViewModel)Mapper.Map(validTask, validTask.GetType(), typeof(TaskViewModel));
-            var tasks = new List<Task>() { validTask  }.AsQueryable();
+            var tasks = new List<Task>() { validTask }.AsQueryable();
             taskRepository = new Mock<IRepository<Task>>();
             taskRepository.Setup(t => t.All).Returns(tasks);
             taskRepository.Setup(t => t.Find(invalidTaskId)).Returns((Task)null);
@@ -66,11 +66,11 @@ namespace Statuos.Test.Controllers
 
             userRepository.Setup(u => u.All).Returns(users);
             controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object, projectService.Object);
-            
-            SetupControllerContext();
+
+            SetupControllerContext(controller);
         }
 
-        private void SetupControllerContext()
+        private void SetupControllerContext(TaskController controller)
         {
             Mock<IPrincipal> principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity.Name).Returns("jdhall");
@@ -97,7 +97,7 @@ namespace Statuos.Test.Controllers
         public void DetailsReturnsNotFoundForInvalidId()
         {
             var result = controller.Details(invalidTaskId);
-            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));            
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
         }
 
         [TestMethod]
@@ -118,11 +118,40 @@ namespace Statuos.Test.Controllers
         }
 
         [TestMethod]
-        public void CreateCallsTaskServiceAdd()
+        public void CreateCallsProjectServiceEdit()
         {
-            validTaskViewModel.UserNames = "";
-            var result = controller.Create(validTaskViewModel);
-            taskService.Verify(ts => ts.Add(It.Is<Task>(t => t.Id == validTaskViewModel.Id)), Times.Once(), "Add service method not called once");
+            Mock<IRepository<Task>> taskRepository = new Mock<IRepository<Task>>();
+            Mock<ITaskService> taskService = new Mock<ITaskService>();
+            Mock<IRepository<User>> userRepository = new Mock<IRepository<User>>();
+            Mock<IRepository<Project>> projectRepository = new Mock<IRepository<Project>>();
+            Mock<IProjectService> projectService = new Mock<IProjectService>();
+            
+            var project = new BasicProject() { Id = 1, EstimatedHours = 3m, Title = "TestProject", ProjectManager = new User() { UserName = "jdhall" }, Tasks = new List<Task>() };
+            projectRepository.Setup(p => p.Find(1)).Returns(project);
+            userRepository.Setup(u => u.All).Returns(GetIQueryableUser());
+            var controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object, projectService.Object);
+            SetupControllerContext(controller);
+
+            var viewModel = new BasicTaskViewModel() { Id = 1, Title = "TestTask", UserNames = "jdhall", EstimatedHours = 4m };
+            viewModel.Project = new TaskViewModel.ProjectDetails() { Id = 1, CustomerName = "TST", EstimatedHours = 2m, Title = "TestProject" };
+            var result = controller.Create(viewModel);
+            projectService.Verify(ps => ps.Edit(It.Is<Project>(p => p.Tasks.Any(t => t.Id == 1))), Times.Once(), "ProjectEdit not called");
+        }
+
+
+        private IQueryable<User> GetIQueryableUser()
+        {
+            var users = new List<User>() 
+                { 
+                    new User() { 
+                        Id = 1, UserName = "jdhall", 
+                        Projects = new List<Project>() { 
+                            new BasicProject() { Id = 1 } 
+                        } 
+                    } 
+                }.AsQueryable();
+
+            return users;
         }
 
     }

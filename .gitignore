@@ -22,3 +22,5 @@ _ReSharper*/
 *.coverage
 TestResults/Statuos.TE.Tests.mdf
 TestResults/Statuos.TE.Tests_log.ldf
+TestResults/Statuos.TE.Tests_log.ldf
+TestResults/Statuos.TE.Tests.mdf

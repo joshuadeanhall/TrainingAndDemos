@@ -33,7 +33,7 @@ namespace Statuos.Test.Controllers.Admin
         }
         [TestMethod]
         public void IndexReturnsListOfCustomers()
-        {            
+        {
             var result = (ViewResult)controller.Index();
             Assert.IsInstanceOfType(result.Model, typeof(List<CustomerViewModel>));
         }
@@ -105,16 +105,51 @@ namespace Statuos.Test.Controllers.Admin
             Assert.AreEqual(validCustomerId, customerViewModel.Id);
         }
         [TestMethod]
-        public void CanDeleteCustomer()
+        public void CanDeleteCustomerWithNoProjects()
         {
+            int customerId = 1;
+            Mock<IRepository<Customer>> customerRepositoryMock = new Mock<IRepository<Customer>>();
+            Mock<ICustomerService> customerServiceMock = new Mock<ICustomerService>();
+            var customer = new Customer()
+            {
+                Code = "TST",
+                Id = customerId,
+                Name = "Test",
+                Projects = new List<Project>()
+            };
+            customerRepositoryMock.Setup(c => c.Find(customerId)).Returns(customer);
+            var controller = new CustomerController(customerRepositoryMock.Object, customerServiceMock.Object);
             controller.DeleteConfirmed(customerVM.Id);
             customerServiceMock.Verify(r => r.Delete(It.IsAny<Customer>()), Times.Once(), "Service call to delete was not made");
         }
+
+        [TestMethod]
+        public void CantDeleteCustomerWithProjects()
+        {
+            int customerId = 1;
+            Mock<IRepository<Customer>> customerRepositoryMock = new Mock<IRepository<Customer>>();
+            Mock<ICustomerService> customerServiceMock = new Mock<ICustomerService>();
+            var customer = new Customer()
+            {
+                Code = "TST",
+                Id = customerId,
+                Name = "Test",
+                Projects = new List<Project>() { new BasicProject() { Id = 1, Title = "Project1", CustomerId = customerId, EstimatedHours = 2m}}
+            };
+            customerRepositoryMock.Setup(c => c.Find(customerId)).Returns(customer);
+            var controller = new CustomerController(customerRepositoryMock.Object, customerServiceMock.Object);
+            var result = (ViewResult)controller.DeleteConfirmed(customerVM.Id);
+            Assert.IsFalse(controller.ModelState.IsValid);
+            Assert.IsInstanceOfType(result.Model, typeof(CustomerViewModel));
+        }
+
+
 
         private void Setup()
         {
             customerVM = new CustomerViewModel() { Code = "TestCode", Name = "TestName", Id = validCustomerId };
             customer = new Customer() { Code = "TestCode", Name = "TestName", Id = validCustomerId };
+
             customerRepositoryMock = new Mock<IRepository<Customer>>();
             customerServiceMock = new Mock<ICustomerService>();
             controller = new CustomerController(customerRepositoryMock.Object, customerServiceMock.Object);
