@@ -20,16 +20,31 @@ namespace Statuos.Domain
         public virtual ProjectCompletedDetails CompletedDetails { get; set; }
         public abstract string ProjectTypeDescription { get; }
 
-        public virtual void MarkComplete(ProjectCompletedDetails projectCompletionDetails)
+        public virtual void MarkComplete(User user)
         {
+
             if (CompletedDetails != null)
             {
                 return;
             }
-            foreach (var task in Tasks)
+            if (ProjectManager.UserName != user.UserName)
             {
-                task.MarkComplete(ProjectManager);
+                return;
             }
+            if (this.Tasks != null)
+            {
+                foreach (var task in Tasks)
+                {
+                    task.MarkComplete(ProjectManager);
+                }
+            }
+
+            ProjectCompletedDetails projectCompletionDetails = new ProjectCompletedDetails()
+            {
+                CompletedById = user.Id,
+                CompletedOn = DateTime.Now,
+                ProjectId = this.Id
+            };
             CompletedDetails = projectCompletionDetails;
         }
 

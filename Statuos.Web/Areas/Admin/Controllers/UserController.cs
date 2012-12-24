@@ -129,7 +129,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
             }
             return View(user.MapTo<UserViewModel>());
         }
-
+        //TODO refactor this into the User class
         private void VerifyUserCanBeDeleted(User user)
         {
             if (user.Tasks.Count > 0 || user.Projects.Count > 0)

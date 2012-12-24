@@ -31,7 +31,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
 
         private void SetupCustomerViewBag()
         {
-            ViewBag.Customers = new SelectList(_customerRepository.All.ToList(), "Id", "Name"); 
+            ViewBag.Customers = new SelectList(_customerRepository.All.ToList(), "Id", "Name");
         }
 
         private void SetupProjectTypesViewBag()
@@ -63,7 +63,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
             return View(project.MapTo<ProjectViewModel>());
         }
 
-        
+
 
         //
         // GET: /Admin/Project/Create
@@ -74,7 +74,7 @@ namespace Statuos.Web.Areas.Admin.Controllers
             return View("Create", projectviewmodel);
         }
 
-        
+
 
         //
         // POST: /Admin/Project/Create
@@ -165,8 +165,14 @@ namespace Statuos.Web.Areas.Admin.Controllers
 
         private void ValidateProjectHasNoTasks(Project project)
         {
-            if (project.Tasks.Count > 0)
+            if (project.Tasks == null)
+            {
+                return;
+            }
+            if (project.Tasks == null || project.Tasks.Count > 0)
+            {
                 ModelState.AddModelError("", "The Project has tasks and can not be deleted");
+            }
         }
 
         protected override void Dispose(bool disposing)

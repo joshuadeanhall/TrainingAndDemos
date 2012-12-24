@@ -27,7 +27,7 @@ namespace Statuos.Test.Controllers.Admin
         {
             Mapper.CreateMap<User, UserViewModel>();
             Mapper.CreateMap<UserViewModel, User>();
-            validUser = new User() { Id = validUserId, UserName = "jdhall" };
+            validUser = new User() { Id = validUserId, UserName = "jdhall", Projects = new List<Project>(), Tasks = new List<Task>()};
             userViewModel = (UserViewModel)Mapper.Map(validUser, validUser.GetType(), typeof(UserViewModel));
             userRepository = new Mock<IRepository<User>>();
             var users = new List<User> { new User() { Id = validUserId, UserName = "jdhall" } }.AsQueryable();

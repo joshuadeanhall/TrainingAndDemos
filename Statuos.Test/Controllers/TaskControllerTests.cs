@@ -52,7 +52,25 @@ namespace Statuos.Test.Controllers
                     } 
                 }.AsQueryable();
             invalidTaskViewModel = new BasicTaskViewModel() { EstimatedHours = 3.00M, Id = 1, Project = new TaskViewModel.ProjectDetails() { Id = 11 }, Title = "TaskTitle" };
-            validTask = new BasicTask() { Id = validTaskId, EstimatedHours = 3.00M, ProjectId = 1, Title = "Task Title", Users = users.ToList() };
+            validTask = new BasicTask()
+            {
+                Id = validTaskId,
+                EstimatedHours = 3.00M,
+                ProjectId = 1,
+                Title = "Task Title",
+                Users = users.ToList(),
+                CompletedDetails = null,
+                Project = new BasicProject()
+                {
+                    Id = 1,
+                    ProjectManager = new User()
+                    {
+                        IsActive = true,
+                        Id = 1,
+                        UserName = "jdhall"
+                    }
+                }
+            };
             validTaskViewModel = (BasicTaskViewModel)Mapper.Map(validTask, validTask.GetType(), typeof(TaskViewModel));
             var tasks = new List<Task>() { validTask }.AsQueryable();
             taskRepository = new Mock<IRepository<Task>>();
@@ -103,6 +121,35 @@ namespace Statuos.Test.Controllers
         [TestMethod]
         public void DetailsReturnsViewWithValidTaskViewModel()
         {
+
+            Mock<IRepository<Task>> taskRepository = new Mock<IRepository<Task>>();
+            Mock<ITaskService> taskService = new Mock<ITaskService>();
+            Mock<IRepository<User>> userRepository = new Mock<IRepository<User>>();
+            Mock<IRepository<Project>> projectRepository = new Mock<IRepository<Project>>();
+            Mock<IProjectService> projectService = new Mock<IProjectService>();
+            var tasks = new List<BasicTask>();
+            var task = new BasicTask()
+            {
+                Id = 1,
+                EstimatedHours = 2m,
+                Title = "Title",
+                Project = new BasicProject()
+                {
+                    Id = 1,
+                    ProjectManager = new User()
+                    {
+                        Id = 1,
+                        IsActive = true,
+                        UserName = "jdhall"
+                    }
+                },
+                Users = new List<User>()
+            };
+            tasks.Add(task);
+            taskRepository.Setup(t => t.All).Returns(tasks.AsQueryable());
+
+            TaskController controller = new TaskController(taskRepository.Object, taskService.Object, userRepository.Object, projectRepository.Object, projectService.Object);
+            SetupControllerContext(controller);
             var result = (ViewResult)controller.Details(validTaskId);
             var model = (TaskViewModel)result.Model;
 
@@ -125,7 +172,7 @@ namespace Statuos.Test.Controllers
             Mock<IRepository<User>> userRepository = new Mock<IRepository<User>>();
             Mock<IRepository<Project>> projectRepository = new Mock<IRepository<Project>>();
             Mock<IProjectService> projectService = new Mock<IProjectService>();
-            
+
             var project = new BasicProject() { Id = 1, EstimatedHours = 3m, Title = "TestProject", ProjectManager = new User() { UserName = "jdhall" }, Tasks = new List<Task>() };
             projectRepository.Setup(p => p.Find(1)).Returns(project);
             userRepository.Setup(u => u.All).Returns(GetIQueryableUser());
@@ -138,7 +185,117 @@ namespace Statuos.Test.Controllers
             projectService.Verify(ps => ps.Edit(It.Is<Project>(p => p.Tasks.Any(t => t.Id == 1))), Times.Once(), "ProjectEdit not called");
         }
 
+        [TestMethod]
+        public void AddUserWithIdReturnsValidViewModel()
+        {
+            var result = (ViewResult)controller.AddUser(validTaskId);
+            Assert.IsInstanceOfType(result.Model, typeof(TaskUserViewModel));
+        }
 
+        [TestMethod]
+        public void AddUserWithViewModelCallsEditOnTaskServiceWithNewUser()
+        {
+            User user = new User() { Id = 1, UserName = "NewUser", IsActive = true };
+            List<User> users = new List<User>();
+            users.Add(user);
+            TaskUserViewModel userViewModel = new TaskUserViewModel()
+            {
+                TaskId = validTaskId,
+                UserName = user.UserName
+            };
+            userRepository.Setup(u => u.All).Returns(users.AsQueryable());
+            controller.AddUser(userViewModel);
+
+            taskService.Verify(ts => ts.Edit(It.Is<Task>(t => t.Users.Contains(user))));
+        }
+
+        [TestMethod]
+        public void DeleteUserFromTaskWithValidUserAndTaskCallsDeleteAssignedUser()
+        {
+            userRepository.Setup(u => u.Find(1)).Returns(new User() { Id = 1, UserName = "jdhall", IsActive = true });
+            controller.DeleteUser(validTaskId, 1);
+            taskService.Verify(ts => ts.DeleteAssignedUser(It.Is<Task>(t => t.Id == validTaskId), It.Is<User>(u => u.Id == 1)));
+        }
+
+        [TestMethod]
+        public void DeleteUserFromTaskWithInvaliduserReturnsNotFound()
+        {
+            userRepository.Setup(u => u.Find(11)).Returns((User)null);
+            var result = controller.DeleteUser(validTaskId, 11);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void DeleteUserFromTaskWithInvalidTaskReturnsNotFound()
+        {
+            taskRepository.Setup(u => u.Find(validTaskId)).Returns((Task)null);
+            userRepository.Setup(u => u.Find(1)).Returns(new User() { Id = 1, UserName = "jdhall", IsActive = true });
+            var result = controller.DeleteUser(validTaskId, 1);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void EditTaskWithIdReturnsValidViewModel()
+        {
+            var result = (ViewResult)controller.Edit(validTaskId);
+            Assert.IsInstanceOfType(result.Model, typeof(TaskViewModel));
+        }
+
+        [TestMethod]
+        public void EditTaskWithInvalidIdReturnsNotFound()
+        {
+            var result = controller.Edit(invalidTaskId);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void EditTaskWithValidIdAsNotAProjectManagerReturnsNotFound()
+        {
+            var task = new BasicTask()
+            {
+                Id = validTaskId,
+                Project = new BasicProject()
+                {
+                    Id = 1,
+                    ProjectManager = new User()
+                    {
+                        Id = 1,
+                        IsActive = true,
+                        UserName = "NotCurrentUser"
+                    }
+                }
+            };
+            
+            taskRepository.Setup(t => t.Find(validTaskId)).Returns(task);
+            var result = controller.Edit(validTaskId);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void EditTaskWithValidTaskViewModelPassesValidTaskToEdit()
+        {
+            validTaskViewModel.Title = "TitleEdit";
+            controller.Edit(validTaskViewModel);
+            taskService.Verify(ts => ts.Edit(It.Is<Task>(t => t.Title == "TitleEdit")));
+            
+        }
+
+        [TestMethod]
+        public void EditTaskWithCurrentUserNotAProjectManagerReturnsNotFound()
+        {
+            validTask.Project.ProjectManager.UserName = "NotCurrentUser";
+            taskRepository.Setup(t => t.Find(validTask.Id)).Returns(validTask);
+            var result = controller.Edit(validTaskViewModel);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public void CompleteTaskWithValidIdMarksTaskCompleteAndCallEditService()
+        {            
+            controller.CompleteTask(validTaskId);
+            taskService.Verify(ts => ts.Edit(It.Is<Task>(t => t.CompletedDetails != null)));
+            
+        }
         private IQueryable<User> GetIQueryableUser()
         {
             var users = new List<User>() 

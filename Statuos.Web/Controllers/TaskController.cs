@@ -115,6 +115,7 @@ namespace Statuos.Web.Controllers
         }
 
         //This is not a post and should be converted to using post in the future.  Doing a confirm delete page would be a simple way to accomplish this.
+        //TODO Change this to just delete the user from the task then pass it to edit and move the 
         public ActionResult DeleteUser(int taskId, int userId)
         {
             var task = _taskRepository.Find(taskId);
@@ -152,7 +153,7 @@ namespace Statuos.Web.Controllers
             var task = _taskRepository.Find(id);
             if (task == null)
                 return HttpNotFound();
-            if (!currentUser.Projects.Any(p => p.Id == task.ProjectId))
+            if (task.Project.ProjectManager.UserName != User.Identity.Name)
                 return HttpNotFound();
 
             return View(task.MapTo<TaskViewModel>());
@@ -165,12 +166,10 @@ namespace Statuos.Web.Controllers
             VerifyProjectId(taskViewModel);
             if (ModelState.IsValid)
             {
-                //var task = taskViewModel.MapTo<Task>();
                 var task = _taskRepository.Find(taskViewModel.Id);
                 task.Title = taskViewModel.Title;
                 task.EstimatedHours = taskViewModel.EstimatedHours;
-                var currentUser = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-                if (!currentUser.Projects.Any(p => p.Id == taskViewModel.Project.Id))
+                if (task.Project.ProjectManager.UserName != User.Identity.Name)
                     return HttpNotFound();
 
                 _taskService.Edit(task);
@@ -191,6 +190,7 @@ namespace Statuos.Web.Controllers
             _taskService.Edit(task);
             return RedirectToAction("Details", new { id = task.Id }); 
         }
+
 
         private void VerifyProjectId(TaskViewModel taskViewModel)
         {

@@ -38,7 +38,7 @@ namespace Statuos.Test.Controllers
             Mapper.AddProfile(new ProjectProfile());
             Mapper.AddProfile(new TaskProfile());
             userRepository = new Mock<IRepository<User>>();
-            var projectManager = new User() { Id = 1, UserName = "jdhall" };
+            var projectManager = new User() { Id = 1, UserName = "jdhall", IsActive = true };
             var projects = new List<Project>() { new BasicProject() { Id = validProjectId, CustomerId = 1, Title = "Project 1", ProjectManager = projectManager } }.AsQueryable();
             projectRepository = new Mock<IRepository<Project>>();
             projectRepository.Setup(p => p.All).Returns(projects);
@@ -62,8 +62,8 @@ namespace Statuos.Test.Controllers
         [TestMethod]
         public void IndexReturnsProjectViewModelsForManager()
         {
-           var result =  controller.Index();
-           Assert.IsInstanceOfType(result, typeof(ViewResult));
+            var result = controller.Index();
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
         [TestMethod]
@@ -78,7 +78,31 @@ namespace Statuos.Test.Controllers
         {
             var result = (ViewResult)controller.Details(validProjectId);
             var model = (ProjectViewModel)result.Model;
-            Assert.AreEqual(validProjectId, model.Id);            
+            Assert.AreEqual(validProjectId, model.Id);
+        }
+
+        [TestMethod]
+        public void CompleteTaskForValidProjectMarksProjectCompleteAndCallsEdit()
+        {
+
+            List<User> users = new List<User>();
+            User user = new User()
+            {
+                Id = 1,
+                IsActive = true,
+                UserName = "jdhall"
+            };
+            users.Add(user);
+            var project = new BasicProject()
+            {
+                Id = validProjectId,
+                ProjectManager = user
+            };
+            userRepository.Setup(u => u.All).Returns(users.AsQueryable());
+            projectRepository.Setup(p => p.Find(validProjectId)).Returns(project);
+            controller.CompleteProject(validProjectId);
+
+            projectService.Verify(ps => ps.Edit(It.Is<Project>(p => p.CompletedDetails != null)));
         }
 
     }

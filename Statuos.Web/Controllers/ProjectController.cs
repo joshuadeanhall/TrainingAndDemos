@@ -57,16 +57,16 @@ namespace Statuos.Web.Controllers
             ViewBag.TaskTypes = new SelectList(TypeHelper.GetTypes<TaskViewModel>(), "Type", "Name");
         }
 
+        //TODO Need to make this a post and also verify the manager is active.
         public ActionResult CompleteProject(int id = 0)
         {
             var project = _projectRepository.Find(id);
             var user = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            var completionDetails = new ProjectCompletedDetails() { CompletedById = user.Id, CompletedOn = DateTime.Now, ProjectId = project.Id };
             if (project == null)
             {
                 return HttpNotFound();
             }
-            project.MarkComplete(completionDetails);
+            project.MarkComplete(user);
             _projectService.Edit(project);
             return RedirectToAction("Index");
             
