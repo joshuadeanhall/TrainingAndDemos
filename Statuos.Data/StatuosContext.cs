@@ -1,4 +1,5 @@
-﻿using Statuos.Domain;
+﻿using Statuos.Data.Configurations;
+using Statuos.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,6 +23,7 @@ namespace Statuos.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //TODO Create sepearte class for each of these.
+            modelBuilder.Configurations.Add(new ChargeConfiguration());
             ConfigureProjects(modelBuilder);
             ConfigureTasks(modelBuilder);
             ConfigureUsers(modelBuilder);               
@@ -96,6 +98,11 @@ namespace Statuos.Data
 
             modelBuilder.Entity<TaskCompletedDetails>()
                 .HasKey(c => c.TaskId);
+
+            modelBuilder.Entity<Task>()
+                .HasMany(t => t.Charges)
+                .WithRequired()
+                .Map(m => m.MapKey("TaskId"));            
 
         }
 

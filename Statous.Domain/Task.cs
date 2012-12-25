@@ -14,7 +14,12 @@ namespace Statuos.Domain
         public virtual ICollection<User> Users { get; set; }
         public virtual TaskCompletedDetails CompletedDetails { get; set; }
         public decimal EstimatedHours { get; set; }
+        public virtual ICollection<Charge> Charges { get; set; }
 
+        public Task()
+        {
+            Charges = new List<Charge>();
+        }
         public void MarkComplete(User user)
         {
             if (CompletedDetails != null)
@@ -28,6 +33,14 @@ namespace Statuos.Domain
         public bool UserIsAssignedTo(User user)
         {
             return this.Users.Any(u => u.UserName == user.UserName) || this.Project.ProjectManager.UserName == user.UserName;
+        }
+
+        public void ChargeHours(decimal hours, User user)
+        {
+            var charge = new Charge();
+            charge.Hours = hours;
+            charge.User = user;
+            Charges.Add(charge);
         }
     }
 

@@ -45,8 +45,18 @@
     @Html.DisplayForModel()
 
     @Html.ActionLink("Complete Task", "CompleteTask", new { id = Model.Id })
+
+    @using(Html.BeginForm("ChargeHours", "Task"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.TextBox("hours")
+        <p>
+            <input type="submit" value="Charge Hours" />
+        </p>
+    }
 </fieldset>
 
+@Html.Partial("_Charges", Model.Charges)
 <p>
     @Html.ActionLink("Assign New User", "AddUser", new { id = Model.Id })
 </p>

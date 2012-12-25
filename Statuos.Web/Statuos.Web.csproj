@@ -322,6 +322,7 @@
     <Content Include="Views\Task\_AssignedToUsers.cshtml" />
     <Content Include="Views\Task\AddUser.cshtml" />
     <Content Include="Views\Task\_ProjectLink.cshtml" />
+    <Content Include="Views\Task\_Charges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

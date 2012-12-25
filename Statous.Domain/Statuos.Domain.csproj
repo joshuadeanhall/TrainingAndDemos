@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BasicProject.cs" />
     <Compile Include="BasicTask.cs" />
+    <Compile Include="Charge.cs" />
     <Compile Include="CompletedDetails.cs" />
     <Compile Include="MaxHoursProject.cs" />
     <Compile Include="PhoneRequestTask.cs" />

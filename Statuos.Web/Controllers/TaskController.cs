@@ -12,6 +12,7 @@ using Statuos.Web.Infrastructure.AutoMapper;
 using Statuos.Web.Models;
 using Statuos.Data.Queries;
 
+
 namespace Statuos.Web.Controllers
 {
     public class TaskController : Controller
@@ -130,6 +131,17 @@ namespace Statuos.Web.Controllers
             return RedirectToAction("Details", new { id = taskId });
         }
 
+        public ActionResult ChargeHours(int id, decimal hours)
+        {
+            var user = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            var task = _taskRepository.All.Where(t => t.Id == id).UserIsAssignedToTaskQuery(User.Identity.Name).FirstOrDefault();
+            if (task == null)
+                return HttpNotFound();
+            
+            task.ChargeHours(hours, user);
+            _taskService.Edit(task);
+            return RedirectToAction("Details", new { id = id });
+        }
         private List<User> GetUsers(Task taskModel, string[] userNames)
         {
             var users = new List<User>();
