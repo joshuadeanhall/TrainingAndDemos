@@ -33,6 +33,7 @@ namespace Statuos.Web.Controllers
 
         public ActionResult Index()
         {
+            throw new Exception("Error occured for " + User.Identity.Name);
             var projects = _projectRepository.All.Include(p => p.Customer).UserIsProjectManagerQuery(User.Identity.Name);
             return View(projects.ToList().MapTo<ProjectViewModel>());
         }

@@ -24,8 +24,8 @@ namespace Statuos.Domain
         {
             get
             {
-                var x = Tasks.SelectMany(t => t.Charges);
-                return x;
+                //Return all the charges from all the tasks
+                return Tasks.SelectMany(t => t.Charges);
             }
         }
 

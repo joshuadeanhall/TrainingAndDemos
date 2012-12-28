@@ -17,6 +17,11 @@ namespace Statuos.Web.Infrastructure.Installers
                                 .BasedOn<IController>()
                                 .LifestyleTransient()
                                 );
+            //Must also register controller from elmah mvc
+            container.Register(Classes.FromAssemblyContaining<Elmah.Mvc.ElmahController>()
+                .BasedOn<IController>()
+                .LifestyleTransient()
+                );
         }
     }
 }
