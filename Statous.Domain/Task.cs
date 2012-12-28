@@ -40,6 +40,7 @@ namespace Statuos.Domain
             var charge = new Charge();
             charge.Hours = hours;
             charge.User = user;
+            charge.Date = DateTime.Now;
             Charges.Add(charge);
         }
     }

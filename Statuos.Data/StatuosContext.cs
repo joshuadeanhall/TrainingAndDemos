@@ -101,7 +101,7 @@ namespace Statuos.Data
 
             modelBuilder.Entity<Task>()
                 .HasMany(t => t.Charges)
-                .WithRequired()
+                .WithRequired(c => c.Task)
                 .Map(m => m.MapKey("TaskId"));            
 
         }

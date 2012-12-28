@@ -19,8 +19,18 @@ namespace Statuos.Web.Models
         public abstract string ProjectType { get; }
         public IEnumerable<TaskViewModel> Tasks { get; set; }
 
+        public List<ProjectChargeDetails> Charges { get; set; }
+
         [HiddenInput(DisplayValue = false)]
         [MinLength(1)]
         public string ConcreteModelType { get { return this.GetType().ToString(); } }
+
+        public class ProjectChargeDetails
+        {
+            public string TaskTitle { get; set; }
+            public decimal Hours { get; set; }
+            public string User { get; set; }
+            public DateTime Date { get; set; }
+        }
     }
 }

@@ -49,7 +49,9 @@ namespace Statuos.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(project.MapTo<ProjectViewModel>());
+            var projectVM = project.MapTo<ProjectViewModel>();
+            projectVM.Charges = project.Charges.MapTo<ProjectViewModel.ProjectChargeDetails>();
+            return View(projectVM);//project.MapTo<ProjectViewModel>());
         }
 
         private void SetupTaskTypesViewBag()

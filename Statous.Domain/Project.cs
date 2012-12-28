@@ -20,6 +20,15 @@ namespace Statuos.Domain
         public virtual ProjectCompletedDetails CompletedDetails { get; set; }
         public abstract string ProjectTypeDescription { get; }
 
+        public IEnumerable<Charge> Charges
+        {
+            get
+            {
+                var x = Tasks.SelectMany(t => t.Charges);
+                return x;
+            }
+        }
+
         public virtual void MarkComplete(User user)
         {
 
@@ -57,6 +66,7 @@ namespace Statuos.Domain
             }
             //TODO Throw an exception
         }
+
 
         public bool IsActive()
         {

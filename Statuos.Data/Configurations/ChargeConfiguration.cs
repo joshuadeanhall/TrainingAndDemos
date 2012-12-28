@@ -17,6 +17,7 @@ namespace Statuos.Data.Configurations
                 .WithMany()
                 .Map(m => m.MapKey("UserId"))
                 .WillCascadeOnDelete(false);
+            this.Property(c => c.Date).IsRequired();
         }
     }
 }

@@ -323,6 +323,7 @@
     <Content Include="Views\Task\AddUser.cshtml" />
     <Content Include="Views\Task\_ProjectLink.cshtml" />
     <Content Include="Views\Task\_Charges.cshtml" />
+    <Content Include="Views\Project\_ProjectCharges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

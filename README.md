@@ -1,6 +1,8 @@
 statuos
 =======
 
+Added a Notes file that contains some of my thoughts.
+
 
 Statuos is a project/task management system. 
 

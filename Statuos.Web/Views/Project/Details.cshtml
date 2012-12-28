@@ -26,6 +26,8 @@
 </fieldset>
 <!-- In future change to Render Action or AJAX -->
 @{ Html.RenderPartial("_ProjectTasks", Model); }
+
+@Html.Partial("_ProjectCharges", Model.Charges)
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
