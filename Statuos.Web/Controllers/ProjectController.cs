@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Statuos.Data;
+using Statuos.Data.Queries;
 using Statuos.Domain;
-using Statuos.Data;
 using Statuos.Service;
 using Statuos.Web.Infrastructure.AutoMapper;
-using Statuos.Web.Models;
 using Statuos.Web.Infrastructure.Helpers;
-using Statuos.Data.Queries;
+using Statuos.Web.Models;
+using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Statuos.Web.Controllers
 {
@@ -33,7 +29,6 @@ namespace Statuos.Web.Controllers
 
         public ActionResult Index()
         {
-            throw new Exception("Error occured for " + User.Identity.Name);
             var projects = _projectRepository.All.Include(p => p.Customer).UserIsProjectManagerQuery(User.Identity.Name);
             return View(projects.ToList().MapTo<ProjectViewModel>());
         }

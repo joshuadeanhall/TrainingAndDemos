@@ -49,6 +49,12 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.1.0\lib\net35\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Facilities.Logging">
+      <HintPath>..\packages\Castle.LoggingFacility.3.1.0\lib\net40\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.Log4netIntegration">
+      <HintPath>..\packages\Castle.Core-log4net.3.1.0\lib\net40\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
@@ -58,11 +64,15 @@
     <Reference Include="Elmah.Mvc">
       <HintPath>..\packages\Elmah.MVC.2.0.2\lib\net40\Elmah.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -150,7 +160,9 @@
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Infrastructure\Installers\LoggingInstaller.cs" />
     <Compile Include="Infrastructure\Installers\TaskInstaller.cs" />
+    <Compile Include="Infrastructure\Interceptors\Loggers\ServiceLoggerInterceptor.cs" />
     <Compile Include="Models\BasicProjectViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerViewModel.cs" />
     <Compile Include="Models\MaxHoursProjectViewModel.cs" />
@@ -263,6 +275,7 @@
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="log4net.config" />
     <None Include="Properties\PublishProfiles\statuos.pubxml" />
     <None Include="Properties\PublishProfiles\statweb.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />

@@ -1,6 +1,9 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Core;
+using Castle.DynamicProxy;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Statuos.Web.Infrastructure.Interceptors.Loggers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
