@@ -12,5 +12,10 @@ namespace Statuos.Domain
         {
             get { return "Basic Project"; }
         }
+
+        public override bool CanChargeHours(decimal hours)
+        {
+            return true;
+        }
     }
 }

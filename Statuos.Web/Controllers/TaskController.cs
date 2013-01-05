@@ -49,7 +49,12 @@ namespace Statuos.Web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            //TODO user is assigned to or is project manager
+            //TODO clean this up, should handle this when moving most of these operations to dialogs.
+            if (TempData["ViewData"] != null)
+            {
+                ViewData = (ViewDataDictionary)TempData["ViewData"];
+            }
+            //Get task if user is allowed to work on the task.
             Task task = _taskRepository.All.Where(t => t.Id == id).UserIsAssignedToTaskQuery(User.Identity.Name).FirstOrDefault();
 
             if (task == null)
@@ -108,9 +113,16 @@ namespace Statuos.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                project.AddTask(taskModel);
-                _projectService.Edit(project);
-                return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
+
+                if (project.AddTask(taskModel))
+                {
+                    _projectService.Edit(project);
+                    return RedirectToAction("Details", "Project", new { id = taskModel.ProjectId });
+                }
+                else
+                {
+                    ModelState.AddModelError("Max Project Hours", "The estimated hours on this project would go over the allowed hours for the project.  Please revise the tasks estimated hours or increase the projects Max hours");
+                }
             }
             return View(task);
         }
@@ -137,9 +149,16 @@ namespace Statuos.Web.Controllers
             var task = _taskRepository.All.Where(t => t.Id == id).UserIsAssignedToTaskQuery(User.Identity.Name).FirstOrDefault();
             if (task == null)
                 return HttpNotFound();
-            
-            task.ChargeHours(hours, user);
-            _taskService.Edit(task);
+            if (task.Project.CanChargeHours(hours))
+            {
+                task.ChargeHours(hours, user);
+                _taskService.Edit(task);
+            }
+            else
+            {
+                ModelState.AddModelError("Max Hours", "Can't charge hours because it will go over the max limit of possible hours");
+                TempData["ViewData"] = ViewData;
+            }
             return RedirectToAction("Details", new { id = id });
         }
         private List<User> GetUsers(Task taskModel, string[] userNames)

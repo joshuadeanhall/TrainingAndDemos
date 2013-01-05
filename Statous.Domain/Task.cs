@@ -34,7 +34,6 @@ namespace Statuos.Domain
         {
             return this.Users.Any(u => u.UserName == user.UserName) || this.Project.ProjectManager.UserName == user.UserName;
         }
-
         public void ChargeHours(decimal hours, User user)
         {
             var charge = new Charge();
