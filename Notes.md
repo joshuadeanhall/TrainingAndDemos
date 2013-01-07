@@ -1,3 +1,9 @@
+1/6/2013
+
+Most of the functionality of the application has been developed so I am now turning my attention to the usability of the application.  I plan to redo all the lists with the jquery plug-in DataTables.  With this I will be improving the look and feel of the site.  I hope to remove a lot of the simple operations to modal dialogs and keep most operations from doing a post back.  
+
+Once I am done with the lists and AJAX operations I will begin on the charts then will move to custom (free) css template for the site to improve it looks.  Once that is done I will begin testing, once complete the initial stage will be done and the project will be ready to used.  
+
 12/27/2012
 
 I am going to leave notes from this point forward describing my thoughts on the project.  Hopefully this will help people understand my thought process on why I did something.
