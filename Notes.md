@@ -1,3 +1,9 @@
+1/7/2013
+
+I am doing additional UI improvements on lists using DataTables and began thinking "How many of the possible features do I need to implement".  I could simply never implement paging/sorting(ajax)/filtering and be done much faster, or I could implement the features for every possible list and make sure I cover the functionality.  At this point I would normally go to the customer and ask but in this case I am the customer.  I don't like implementing unused features so I am only going to implement features where it will commonly be used.  I am also going to make the realistic use case and say that most(all) users of the system will likely be very small so I can expect only a few users assigned to a project/task and that a single project will have a resonable amount of charges to it, and will have a small amount of tasks associated with it.  With this assumption I can stick to paging and filtering being handled on the client side with the datatables library.  
+
+The larger lists, all tasks, all projects, all users, all customers I can expect to be large enough to need paging and server side processing.
+
 1/6/2013
 
 Most of the functionality of the application has been developed so I am now turning my attention to the usability of the application.  I plan to redo all the lists with the jquery plug-in DataTables.  With this I will be improving the look and feel of the site.  I hope to remove a lot of the simple operations to modal dialogs and keep most operations from doing a post back.  

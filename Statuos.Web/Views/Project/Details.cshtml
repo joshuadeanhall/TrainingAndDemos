@@ -3,7 +3,30 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#projectCharges').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+            
+            $('#projectTasks').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+    </script>
+}
 <h2>Details</h2>
 
 <fieldset>
@@ -27,6 +50,7 @@
 <!-- In future change to Render Action or AJAX -->
 @{ Html.RenderPartial("_ProjectTasks", Model); }
 
+<br />
 @Html.Partial("_ProjectCharges", Model.Charges)
 <p>
     @Html.ActionLink("Back to List", "Index")

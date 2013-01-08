@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -27,6 +28,7 @@ namespace Statuos.Web.Models
 
         public class ProjectChargeDetails
         {
+            [DisplayName("Title")]
             public string TaskTitle { get; set; }
             public decimal Hours { get; set; }
             public string User { get; set; }
