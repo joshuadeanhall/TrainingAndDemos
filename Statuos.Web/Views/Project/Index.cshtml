@@ -4,9 +4,23 @@
     ViewBag.Title = "Index";
 }
 
+@section scripts
+{
+    <script>
+        $("#projects").dataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": false
+        });
+        </script>
+}
 <h2>Index</h2>
 
-<table>
+<table id ="projects">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -22,7 +36,8 @@
         </th>
         <th></th>
     </tr>
-
+    </thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -43,5 +58,5 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>

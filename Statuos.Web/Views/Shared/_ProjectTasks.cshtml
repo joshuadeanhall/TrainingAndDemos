@@ -1,12 +1,11 @@
 ﻿@model ProjectViewModel
 
 <p>
-    @using (Html.BeginForm("CreateTaskType", "Task"))
+    @using (Html.BeginForm("CreateTaskType", "Task", FormMethod.Post, new{ id="createTaskForm"}))
     {
-        @Html.Hidden("Project.Id", Model.Id)
-        @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList)
-        <input type="submit" value="Create Task" />
-        
+        @Html.Hidden("Project.Id", Model.Id, new { id = "createTaskProjectId" })
+        @Html.DropDownList("ConcreteModelType", ViewBag.TaskTypes as SelectList, new { id = "taskModelType" })
+        <input type="submit" value="Create Task" id="createTask" />        
     }
 </p>
 <table id="projectTasks">

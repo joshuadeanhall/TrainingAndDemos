@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +34,7 @@ namespace Statuos.Web.Models
         public class ProjectDetails
         {
             public int Id { get; set; }
+            [DisplayName("Project Title")]
             public string Title { get; set; }
             public string Manager { get; set; }
             public string CustomerName { get; set; }

@@ -474,6 +474,7 @@
     <Content Include="Views\Task\_ProjectLink.cshtml" />
     <Content Include="Views\Task\_Charges.cshtml" />
     <Content Include="Views\Project\_ProjectCharges.cshtml" />
+    <Content Include="Views\Task\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,6 +25,27 @@
                 "bAutoWidth": false
             });
         });
+
+        $(document).ready(function () {
+            $("#createTask").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Create Task",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load("http://localhost:62481/Task/CreateTaskType", {'ConcreteModelType': $("#taskModelType").val(), 'Project.Id': $("#createTaskProjectId").val() });
+            });
+
+            $(".close").live("click", function (e) {
+                e.preventDefault();
+                $(this).closest(".dialog").dialog("close");
+            });
+        });
     </script>
 }
 <h2>Details</h2>

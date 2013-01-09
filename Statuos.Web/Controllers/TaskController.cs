@@ -68,6 +68,10 @@ namespace Statuos.Web.Controllers
 
         public ActionResult CreateTaskType(TaskViewModel task)
         {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Create", task);
+            }
             return View("Create", task);
         }
 
