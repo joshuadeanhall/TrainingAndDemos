@@ -1,0 +1,9 @@
+﻿
+    @using (Html.BeginForm("ChargeHours", "Task"))
+    {
+        @Html.Hidden("id", (int)ViewBag.Id)
+        @Html.TextBox("hours")
+        <p>
+            <input type="submit" value="Charge Hours" />
+        </p>
+    }

@@ -78,6 +78,10 @@ namespace Statuos.Web.Controllers
         public ActionResult AddUser(int id = 0)
         {
             var task = _taskRepository.Find(id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AddUser", task.MapTo<TaskUserViewModel>());
+            }
             return View(task.MapTo<TaskUserViewModel>());
         }
 
@@ -146,7 +150,17 @@ namespace Statuos.Web.Controllers
             _taskService.DeleteAssignedUser(task, user);
             return RedirectToAction("Details", new { id = taskId });
         }
+        public ActionResult ChargeHours(int id)
+        {
+            ViewBag.Id = id;
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ChargeHours");
+            }
+            return View();
+        }
 
+        [HttpPost]
         public ActionResult ChargeHours(int id, decimal hours)
         {
             var user = _userRepository.All.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
@@ -190,7 +204,10 @@ namespace Statuos.Web.Controllers
                 return HttpNotFound();
             if (task.Project.ProjectManager.UserName != User.Identity.Name)
                 return HttpNotFound();
-
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Edit", task.MapTo<TaskViewModel>());
+            }
             return View(task.MapTo<TaskViewModel>());
         }
 

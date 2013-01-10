@@ -1,4 +1,4 @@
-﻿@model Statuos.Web.Models.ProjectViewModel
+﻿@model ProjectViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -38,14 +38,31 @@
                         close: function () { $(this).remove() },
                         modal: true
                     })
-                    .load("http://localhost:62481/Task/CreateTaskType", {'ConcreteModelType': $("#taskModelType").val(), 'Project.Id': $("#createTaskProjectId").val() });
+                    .load($("#createTaskForm").attr("action"), {'ConcreteModelType': $("#taskModelType").val(), 'Project.Id': $("#createTaskProjectId").val() });
             });
 
             $(".close").live("click", function (e) {
                 e.preventDefault();
                 $(this).closest(".dialog").dialog("close");
             });
+
+            $(".editTask").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Edit Task",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"));
+            });
         });
+
+
+
     </script>
 }
 <h2>Details</h2>

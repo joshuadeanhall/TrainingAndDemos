@@ -8,6 +8,7 @@
         <input type="submit" value="Create Task" id="createTask" />        
     }
 </p>
+<h2>Tasks</h2>
 <table id="projectTasks">
     <thead>
         <tr>
@@ -39,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.TaskType)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "Task", new { id = item.Id }, null) |
+                    @Html.ActionLink("Edit", "Edit", "Task", new { id = item.Id }, new {@class = "editTask", data_id = item.Id}) |
                 @Html.ActionLink("Details", "Details", "Task", new { id = item.Id }, null)
                 </td>
             </tr>

@@ -15,7 +15,9 @@ namespace Statuos.Web.Models
         public SelectList ProjectTypes { get; set; }
         public string UserName { get; set; }
         public int CustomerId { get; set; }
+        [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
+        [DisplayName("Estimated Hours")]
         public decimal EstimatedHours { get; set; }
         public abstract string ProjectType { get; }
         public IEnumerable<TaskViewModel> Tasks { get; set; }

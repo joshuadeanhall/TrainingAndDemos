@@ -3,6 +3,57 @@
 @{
     ViewBag.Title = "Details";
 }
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#taskCharges').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $('#users').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#addCharge").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Charge Hours",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"))
+            });
+            $("#assignUser").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Assign User",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"))
+            });
+        });
+    </script>
+}
 @Html.ValidationSummary(false)
 @Html.Partial("_ProjectLink")
 <br />
@@ -47,22 +98,8 @@
 
     @Html.ActionLink("Complete Task", "CompleteTask", new { id = Model.Id })
 
-    @using(Html.BeginForm("ChargeHours", "Task"))
-    {
-        @Html.HiddenFor(model => model.Id)
-        @Html.TextBox("hours")
-        <p>
-            <input type="submit" value="Charge Hours" />
-        </p>
-    }
 </fieldset>
 
-@Html.Partial("_Charges", Model.Charges)
-<p>
-    @Html.ActionLink("Assign New User", "AddUser", new { id = Model.Id })
-</p>
+@Html.Partial("_Charges", Model)
+
 @Html.Partial("_AssignedToUsers")
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

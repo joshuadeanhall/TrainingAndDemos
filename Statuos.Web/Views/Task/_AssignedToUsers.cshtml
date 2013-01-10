@@ -1,23 +1,26 @@
 ﻿@model TaskViewModel
-
-
-<table>
-    <tr>
-        <th>
-            User
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model.Users) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "DeleteUser", new { taskId=Model.Id, userId = item.Id  })
-        </td>
-    </tr>
-}
-
+<h2>Assigned to Users</h2>
+    @Html.ActionLink("Assign New User", "AddUser", new { id = Model.Id }, new { id = "assignUser" })
+<br />
+<table id="users">
+    <thead>
+        <tr>
+            <th>User
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteUser", new { taskId = Model.Id, userId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

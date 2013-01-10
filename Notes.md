@@ -1,3 +1,15 @@
+1/9/2013
+
+More UI improvments.  Most of the client area has been moved to using modal dialogs except for the detail views since the views are somewhat complex.  Even though the dialogs are loaded through ajax the saving is still doing a post back.  I would like for this to be done async but I don't know if I am willing to sacrifice the time to do this.
+
+I have noticed that there is a lot of copy/paste for the js that I am using, I hope to refactor that into some helpers.
+
+The js is currently in the pages, I plan to extract that out into js files soon and reference those.
+
+I still got to clean up the admin pages then the site will have the ajax where it is needed.  I am currently leaning toward not doing server side paging.  In the future I hope to slowly add this in but I don't forsee anyone needing to work on 100+ customers, users, projects, tasks, or charges anytime in the near future.
+
+Once I clean up the admin pages the last thing left to do is work on getting the graphs on the project and task site for task charges.  Once that is done I will do some final testing and fix any issues I discover.  I will then clean up the home page with information on the project and I may attempt to apply a free css template.  Once this is complete I will consider the project done.  From that point I will slowly be adding additional features (Mostly improve the ajax functionality) and add unit testing and bug fixes.  If anyone uses the project and finds bugs I will try to quickly fix those items.
+
 1/7/2013
 
 I am doing additional UI improvements on lists using DataTables and began thinking "How many of the possible features do I need to implement".  I could simply never implement paging/sorting(ajax)/filtering and be done much faster, or I could implement the features for every possible list and make sure I cover the functionality.  At this point I would normally go to the customer and ask but in this case I am the customer.  I don't like implementing unused features so I am only going to implement features where it will commonly be used.  I am also going to make the realistic use case and say that most(all) users of the system will likely be very small so I can expect only a few users assigned to a project/task and that a single project will have a resonable amount of charges to it, and will have a small amount of tasks associated with it.  With this assumption I can stick to paging and filtering being handled on the client side with the datatables library.  

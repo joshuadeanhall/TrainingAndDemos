@@ -1,4 +1,4 @@
-﻿@model Statuos.Web.Models.TaskUserViewModel
+﻿@model TaskUserViewModel
 
 @{
     ViewBag.Title = "AddUser";
@@ -6,26 +6,7 @@
 
 <h2>AddUser</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.TaskId);
-    <fieldset>
-        <legend>TaskUserViewModel</legend>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+@Html.Partial("_AddUser")
 
 <div>
     @Html.ActionLink("Back to List", "Index")

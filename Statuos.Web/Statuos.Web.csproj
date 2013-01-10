@@ -475,6 +475,10 @@
     <Content Include="Views\Task\_Charges.cshtml" />
     <Content Include="Views\Project\_ProjectCharges.cshtml" />
     <Content Include="Views\Task\_Create.cshtml" />
+    <Content Include="Views\Task\_Edit.cshtml" />
+    <Content Include="Views\Task\ChargeHours.cshtml" />
+    <Content Include="Views\Task\_ChargeHours.cshtml" />
+    <Content Include="Views\Task\_AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
