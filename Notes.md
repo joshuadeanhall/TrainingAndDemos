@@ -1,3 +1,11 @@
+1/10/2013
+
+More UI improvements on the admin side.  At this point I am going to move on to the last major feature, reporting.  The UI still needs work but I think I will add to that over time other than modifying the home page and a possible CSS template.  
+
+Once the reporting is done I will begin testing, fixing what is broken, then I will be done with the intial release of the project.
+
+As I am adding UI improvements I am noticing that I am doing the same thing to all pages.  I hope to pull this out into an html helper to prevent all the copy/pasting.  I don't want to abstract away all of DataTables since it would end up limiting me later so I plan to only refactor out the base setup I use most of the time.  More complex configuration will still be done as needed.
+
 1/9/2013
 
 More UI improvments.  Most of the client area has been moved to using modal dialogs except for the detail views since the views are somewhat complex.  Even though the dialogs are loaded through ajax the saving is still doing a post back.  I would like for this to be done async but I don't know if I am willing to sacrifice the time to do this.

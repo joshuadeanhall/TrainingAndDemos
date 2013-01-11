@@ -49,6 +49,10 @@ namespace Statuos.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Create");
+            }
             return View();
         }
 

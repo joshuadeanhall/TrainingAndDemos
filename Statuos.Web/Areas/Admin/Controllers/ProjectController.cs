@@ -71,6 +71,10 @@ namespace Statuos.Web.Areas.Admin.Controllers
         public ActionResult CreateProjectType(ProjectViewModel projectviewmodel = null)
         {
             SetupCustomerViewBag();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_create", projectviewmodel);
+            }
             return View("Create", projectviewmodel);
         }
 

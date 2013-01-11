@@ -360,6 +360,9 @@
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\file_types.psd" />
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\copy document.psd" />
     <Content Include="Content\DataTables\extras\TableTools\media\images\psd\collection.psd" />
+    <Content Include="Areas\Admin\Views\Customer\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\_Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\_Create.cshtml" />
     <None Include="Properties\PublishProfiles\statuos.pubxml" />
     <None Include="Properties\PublishProfiles\statweb.pubxml" />
     <Content Include="Scripts\DataTables\docs\media\js\doc.js" />
