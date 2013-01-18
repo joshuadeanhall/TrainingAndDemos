@@ -24,15 +24,15 @@ namespace MBlog.Controllers
             var password = ConfigurationManager.AppSettings.Get("Password");
             var databaseName = ConfigurationManager.AppSettings.Get("Database");
 
-            //var client = new MongoClient(url);
-            //var server = client.GetServer();
-            //MongoCredentials creds = new MongoCredentials(username, password);
-            //var database = server.GetDatabase(databaseName, creds);
+            var client = new MongoClient(url);
+            var server = client.GetServer();
+            MongoCredentials creds = new MongoCredentials(username, password);
+            var database = server.GetDatabase(databaseName, creds);
 
-            //var collection = database.GetCollection<Blog>("blogs");
+            var collection = database.GetCollection<Blog>("blogs");
             var blog = new Blog {PublishDate = DateTime.Now, Title = "First Blog" };
 
-            //collection.Insert(blog);
+            collection.Insert(blog);
 
             ViewBag.Message = string.Format("Modify this template to jump-start your ASP.NET MVC application. {0} ::: {1} ::: {2} ::: {3}", url, username, password, databaseName);
 
