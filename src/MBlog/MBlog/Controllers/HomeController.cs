@@ -9,6 +9,7 @@ using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using MongoDB.Driver.Linq;
 using MBlog.Domain;
+using System.Configuration;
 
 
 
@@ -18,8 +19,7 @@ namespace MBlog.Controllers
     {
         public ActionResult Index()
         {
-            var connectionString = "mongodb://mongo01/?safe=true";
-            var client = new MongoClient(connectionString);
+            var client = new MongoClient(ConfigurationManager.AppSettings["MONGOHQ_URL"]);
             var server = client.GetServer();
             var database = server.GetDatabase("someblog");
 
