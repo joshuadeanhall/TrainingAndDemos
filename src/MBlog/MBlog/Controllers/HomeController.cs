@@ -19,9 +19,10 @@ namespace MBlog.Controllers
     {
         public ActionResult Index()
         {
-            var client = new MongoClient(ConfigurationManager.AppSettings["MONGOHQ_URL"]);
+            var client = new MongoClient(ConfigurationManager.AppSettings.Get("MongoUrl"));
             var server = client.GetServer();
-            var database = server.GetDatabase("someblog");
+            MongoCredentials creds = new MongoCredentials(ConfigurationManager.AppSettings.Get("User"), ConfigurationManager.AppSettings.Get("Password"));
+            var database = server.GetDatabase(ConfigurationManager.AppSettings.Get("Database"), creds);
 
             var collection = database.GetCollection<Blog>("blogs");
             var blog = new Blog {PublishDate = DateTime.Now, Title = "First Blog" };
