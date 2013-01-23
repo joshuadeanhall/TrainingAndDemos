@@ -15,7 +15,7 @@ using System.Configuration;
 
 namespace MBlog.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MongoController
     {
         public ActionResult Index()
         {
@@ -34,7 +34,7 @@ namespace MBlog.Controllers
 
             collection.Insert(blog);
 
-            ViewBag.Message = string.Format("Modify this template to jump-start your ASP.NET MVC application. {0} ::: {1} ::: {2} ::: {3}", url, username, password, databaseName);
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View();
         }
