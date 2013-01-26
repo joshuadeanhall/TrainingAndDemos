@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Castle.Core.Logging;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace MBlog.Controllers
 {
     public abstract class MongoController : Controller
     {
+        public ILogger Logger { get; set; }
         public MongoDatabase Database { get; set; }
 
     }
