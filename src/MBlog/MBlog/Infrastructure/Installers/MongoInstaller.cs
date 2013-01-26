@@ -1,5 +1,4 @@
 using System.Configuration;
-using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -11,9 +10,9 @@ namespace MBlog.Infrastructure.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
-                ConfigurationManager.AppSettings.Get("MONGOLAB_URI") ??
-                "mongodb://localhost/Things";
+            var connectionstring = ConfigurationManager.AppSettings.Get("MongoDatabaseUrl") ??
+                                   ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
+                                   ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
             var url = new MongoUrl(connectionstring);
             var client = new MongoClient(url);
             var server = client.GetServer();
