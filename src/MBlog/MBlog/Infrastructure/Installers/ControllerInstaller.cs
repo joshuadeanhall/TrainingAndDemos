@@ -12,6 +12,10 @@ namespace MBlog.Infrastructure.Installers
             container.Register(Classes.FromThisAssembly()
                                       .BasedOn<IController>()
                                       .LifestyleTransient());
+            container.Register(Classes.FromAssemblyContaining<Elmah.Mvc.ElmahController>()
+                .BasedOn<IController>()
+                .LifestyleTransient()
+                );
         }
     }
 }

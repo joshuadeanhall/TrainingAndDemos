@@ -11,7 +11,9 @@ namespace MBlog.Infrastructure.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            var connectionstring = ConfigurationManager.AppSettings.Get("(MONGOHQ_URL|MONGOLAB_URI)");
+            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
+                ConfigurationManager.AppSettings.Get("MONGOLAB_URI") ??
+                "mongodb://localhost/Things";
             var url = new MongoUrl(connectionstring);
             var client = new MongoClient(url);
             var server = client.GetServer();
