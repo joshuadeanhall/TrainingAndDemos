@@ -17,7 +17,7 @@ namespace MBlog.Infrastructure.Installers
             var server = client.GetServer();
             //TODO pull blog name from app.config
             container.Register(Component.For<MongoDatabase>()
-                .Instance(server.GetDatabase("Blog"))
+                .Instance(server.GetDatabase(url.DatabaseName))
                 .LifestylePerWebRequest());
         }
     }
