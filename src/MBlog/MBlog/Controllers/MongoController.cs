@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MBlog.Controllers
 {
-    public class MongoController : Controller
+    public abstract class MongoController : Controller
     {
         public MongoDatabase Database { get; set; }
 
