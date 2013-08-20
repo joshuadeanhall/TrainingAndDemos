@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{484228
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Backend", "..\..\TestWeb\TestWeb.Backend\TestWeb.Backend.csproj", "{8C323124-ED96-40C6-A1FD-E8C4F93A2498}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Backend", "..\..\TestWeb\TestWeb\TestWeb.Backend\TestWeb.Backend.csproj", "{8C323124-ED96-40C6-A1FD-E8C4F93A2498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Messages", "..\..\TestWeb\TestWeb.Messages\TestWeb.Messages.csproj", "{C95E80DB-B859-489F-91FB-23B160E61D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Messages", "..\..\TestWeb\TestWeb\TestWeb.Messages\TestWeb.Messages.csproj", "{C95E80DB-B859-489F-91FB-23B160E61D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Data", "..\..\TestWeb\TestWeb.Data\TestWeb.Data.csproj", "{2895346A-B210-47AB-A9F6-F32D706DAF88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Data", "..\..\TestWeb\TestWeb\TestWeb.Data\TestWeb.Data.csproj", "{2895346A-B210-47AB-A9F6-F32D706DAF88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
