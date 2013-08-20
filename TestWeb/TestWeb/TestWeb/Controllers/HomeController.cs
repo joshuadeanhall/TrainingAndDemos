@@ -30,9 +30,10 @@ namespace TestWeb.Controllers
         }
 
 
-        public ActionResult SendCommand()
+        public ActionResult SendCommand(SendCommandModel model)
         {
-            MvcApplication.Bus.Send(new SendCommandMessage {Id = Guid.NewGuid(), Name = "NewName"});
+
+            MvcApplication.Bus.Send(new SendCommandMessage {Id = Guid.NewGuid(), Name = model.Name});
            return RedirectToAction("Index");
         }
     }

@@ -16,7 +16,7 @@ namespace TestWeb.Backend
         public void Handle(SendCommandMessage message)
         {
             Logger.Info("Starting message");
-            Bus.Send(new SendCompleteMessage {Name = string.Format("Message {0} processed", message.Id)});
+            Bus.Send(new SendCompleteMessage {Name = string.Format("Message {0} processed name is {1}", message.Id, message.Name)});
         }
     }
 }
