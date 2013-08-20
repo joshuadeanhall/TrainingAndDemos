@@ -44,6 +44,12 @@
     <Reference Include="NServiceBus.Host">
       <HintPath>..\packages\NServiceBus.Host.4.0.3\lib\net40\NServiceBus.Host.exe</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Transports.RabbitMQ">
+      <HintPath>..\..\BackendProject\BackendProject\packages\NServiceBus.RabbitMQ.1.0.3\lib\net40\NServiceBus.Transports.RabbitMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\BackendProject\BackendProject\packages\RabbitMQ.Client.3.0.4\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
