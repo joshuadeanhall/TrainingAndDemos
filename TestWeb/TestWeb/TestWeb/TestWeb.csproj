@@ -329,10 +329,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestWeb.Data\TestWeb.Data.csproj">
-      <Project>{2895346a-b210-47ab-a9f6-f32d706daf88}</Project>
-      <Name>TestWeb.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TestWeb.Messages\TestWeb.Messages.csproj">
       <Project>{c95e80db-b859-489f-91fb-23b160e61d68}</Project>
       <Name>TestWeb.Messages</Name>

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NServiceBus;
 using NServiceBus.Logging;
-using TestWeb.Data;
 using TestWeb.Messages;
 
 namespace TestWeb.Backend

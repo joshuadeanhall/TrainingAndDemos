@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TestWeb.Data;
 using TestWeb.Messages;
 
 namespace TestWeb.Controllers
@@ -33,11 +32,6 @@ namespace TestWeb.Controllers
 
         public ActionResult SendCommand()
         {
-            var context = new TestWebContext();
-            var rand = new Random();
-            context.Examples.Add(new Example {Name = "joshua" + rand.Next(100)});
-            context.SaveChanges();
-            context.Dispose();
             MvcApplication.Bus.Send(new SendCommandMessage {Id = Guid.NewGuid(), Name = "NewName"});
            return RedirectToAction("Index");
         }
