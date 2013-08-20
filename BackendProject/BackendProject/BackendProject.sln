@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Backend", "..\..\TestWeb\TestWeb\TestWeb.Backend\TestWeb.Backend.csproj", "{8C323124-ED96-40C6-A1FD-E8C4F93A2498}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWeb.Backend", "TestWeb.Backend\TestWeb.Backend.csproj", "{8C323124-ED96-40C6-A1FD-E8C4F93A2498}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{002AAFEF-2CFD-4B29-A72B-D9CD0D880145}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B75427CC-A8B6-4955-985C-450700276674}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
