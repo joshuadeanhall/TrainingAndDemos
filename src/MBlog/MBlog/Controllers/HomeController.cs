@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using MBlog.Domain;
+using MBlog.Models;
 
 
 namespace MBlog.Controllers
@@ -19,7 +20,7 @@ namespace MBlog.Controllers
 
         public ActionResult Contact()
         {
-            return View();
+            return View(new ContactViewModel());
         }
     }
 }
