@@ -1,8 +1,39 @@
-﻿@model dynamic
+﻿@model IEnumerable<MBlog.Areas.Admin.Models.PostViewModel>
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "Index";
 }
 
-<h2>title</h2>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublishDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.PostId  }) |
+            @Html.ActionLink("Preview", "Preview", new {  id=item.PostId  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.PostId  })
+        </td>
+    </tr>
+}
+
+</table>

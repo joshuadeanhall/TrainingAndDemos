@@ -9,6 +9,7 @@ namespace MBlog.Infrastructure.Automapper
         {
             Mapper.AddProfile(new AdminUserProfile());
             Mapper.AddProfile(new AdminSettingProfile());
+            Mapper.AddProfile(new AdminPostProfile());
         }
     }
 }

@@ -203,10 +203,12 @@
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\PostViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SettingViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Infrastructure\Automapper\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Automapper\AutoMapperExtenstions.cs" />
+    <Compile Include="Infrastructure\Automapper\Profiles\AdminPostProfile.cs" />
     <Compile Include="Infrastructure\Automapper\Profiles\AdminSettingProfile.cs" />
     <Compile Include="Infrastructure\Automapper\Profiles\AdminUserProfile.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
@@ -295,7 +297,6 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
@@ -304,6 +305,11 @@
     <Content Include="Areas\Admin\Views\Setting\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
