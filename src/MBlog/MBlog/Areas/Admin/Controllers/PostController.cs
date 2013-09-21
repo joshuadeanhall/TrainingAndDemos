@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MBlog.Areas.Admin.Controllers
 {
-    public class PostController : Controller
+    public class PostController : AdminBaseController
     {
         //
         // GET: /Admin/Post/

@@ -31,10 +31,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <!-- Fix nav active http://chrisondotnet.com/2012/08/setting-active-link-twitter-bootstrap-navbar-aspnet-mvc/ -->
-                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="active">@Html.ActionLink("Home", "Index", "Admin")</li>
                     <li>@Html.ActionLink("Users", "Index", "User")</li>
                     <li>@Html.ActionLink("Posts", "Index", "Post")</li>
+                    <li>@Html.ActionLink("Settings", "Index", "Setting")</li>
                 </ul>
+                <p class="navbar-text pull-right">Logged in as @User.Identity.Name</p>
             </div>
             <!--/.navbar-collapse -->
         </div>

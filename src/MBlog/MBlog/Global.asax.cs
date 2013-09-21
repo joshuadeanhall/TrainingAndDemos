@@ -11,6 +11,7 @@ using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
 using MBlog.Infrastructure.CastleWindsor;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace MBlog
 {
@@ -45,7 +46,25 @@ namespace MBlog
             var server = client.GetServer();
             var database = server.GetDatabase(url.DatabaseName);
             InitializeUser(database);
-            
+            InitializeSettings(database);
+
+        }
+
+        private void InitializeSettings(MongoDatabase database)
+        {
+            var collection = database.GetCollection<Setting>("settings");
+            var emailSetting = collection.FindOne(Query.EQ("Name", "Email"));
+            if (emailSetting == null)
+            {
+                emailSetting = new Setting {Name = "Email", Value = "localhost@localhost.net"};
+                collection.Insert(emailSetting);
+            }
+            var aboutMeSetting = collection.FindOne(Query.EQ("Name", "About Me"));
+            if (aboutMeSetting == null)
+            {
+                aboutMeSetting = new Setting {Name = "About Me", Value = ""};
+                collection.Insert(aboutMeSetting);
+            }
         }
 
         private void InitializeUser(MongoDatabase database)

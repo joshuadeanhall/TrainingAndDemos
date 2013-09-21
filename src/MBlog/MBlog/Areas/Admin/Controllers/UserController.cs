@@ -3,11 +3,14 @@ using MBlog.Areas.Admin.Models;
 using MBlog.Controllers;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace MBlog.Areas.Admin.Controllers
 {
     [Authorize]
-    public class UserController : MongoController
+    public class UserController : AdminBaseController
     {
         public ActionResult Index()
         {
@@ -18,22 +21,60 @@ namespace MBlog.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            throw new System.NotImplementedException();
+            return View(new UserViewModel());
         }
 
-        public ActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(UserViewModel userViewModel)
         {
-            throw new System.NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                var collection = Database.GetCollection<User>("users");
+                collection.Insert(userViewModel.MapTo<User>());
+                return RedirectToAction("Index");
+            }
+            return View(userViewModel);
         }
 
-        public ActionResult Details()
+
+        public ActionResult Edit(object id)
         {
-            throw new System.NotImplementedException();
+            var collection = Database.GetCollection<User>("users");
+            var user = collection.FindOneById(new BsonObjectId(id.ToString()));
+            return View(user.MapTo<UserViewModel>());
         }
 
-        public ActionResult Delete()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserViewModel userViewModel)
         {
-            throw new System.NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                var collection = Database.GetCollection<User>("users");
+                collection.Update(Query.EQ("_id", new BsonObjectId(userViewModel.UserId)),
+                    Update.Set("Password", userViewModel.Password));
+                return RedirectToAction("Index");
+            }
+            return View(userViewModel);
+
+        }
+
+        public ActionResult Delete(object id)
+        {
+            var collection = Database.GetCollection<User>("users");
+            var user = collection.FindOneById(new BsonObjectId(id.ToString()));
+            return View(user.MapTo<UserViewModel>());
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(object id)
+        {
+
+            var collection = Database.GetCollection<User>("users");
+            collection.Remove(Query.EQ("_id", new BsonObjectId(id.ToString())));
+            return RedirectToAction("Index");
         }
     }
 }
