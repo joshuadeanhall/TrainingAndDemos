@@ -1,4 +1,4 @@
-﻿@model MBlog.Areas.Admin.Models.PostViewModel
+﻿@model MBlog.Models.PostViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -7,7 +7,7 @@
 <div class="alert alert-danger">You are about to delete the following post</div>
 
 <div class="panel panel-primary">
-    <div class="panel-heading">User</div>
+    <div class="panel-heading">Post</div>
     <div class="panel-body">
         @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
     </div>
@@ -15,7 +15,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
+        <input type="submit" value="Delete" class="btn btn-primary" /> |
         @Html.ActionLink("Back to List", "Index")
     </p>
 }

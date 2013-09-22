@@ -1,4 +1,4 @@
-﻿@model MBlog.Areas.Admin.Models.PostViewModel
+﻿@model MBlog.Models.PostViewModel
 
 @{
     ViewBag.Title = "Preview";
@@ -6,38 +6,8 @@
 
 <h2>Preview</h2>
 
-<fieldset>
-    <legend>PostViewModel</legend>
+@Html.Partial("PostDetails")
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PostId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PostId)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PublishDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PublishDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Content)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Content)
-    </div>
-</fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

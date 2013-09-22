@@ -1,10 +1,8 @@
 ﻿using System.Web.Mvc;
 using MBlog.Areas.Admin.Models;
-using MBlog.Controllers;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
 using MongoDB.Bson;
-using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace MBlog.Areas.Admin.Controllers

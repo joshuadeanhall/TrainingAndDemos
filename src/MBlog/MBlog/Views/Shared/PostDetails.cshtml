@@ -1,0 +1,11 @@
+﻿@model MBlog.Models.PostViewModel
+
+<div class="display-label">
+    @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+</div>
+
+<div class="display-field">
+    @Html.Raw(Model.Content)
+</div>
+
+

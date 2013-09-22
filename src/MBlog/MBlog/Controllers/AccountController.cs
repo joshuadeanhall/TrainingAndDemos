@@ -52,10 +52,8 @@ namespace MBlog.Controllers
         }
 
         //
-        // POST: /Account/LogOff
+        // /Account/LogOff
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();

@@ -1,4 +1,4 @@
-﻿@model MBlog.Areas.Admin.Models.PostViewModel
+﻿@model MBlog.Models.PostViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -34,4 +34,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ckeditor")
+    <script>
+        CKEDITOR.replace('Content');
+    </script>
 }
