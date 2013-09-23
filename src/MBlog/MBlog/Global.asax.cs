@@ -10,6 +10,7 @@ using Castle.Windsor.Installer;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
 using MBlog.Infrastructure.CastleWindsor;
+using MBlog.Services;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
@@ -24,7 +25,6 @@ namespace MBlog
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -34,6 +34,10 @@ namespace MBlog
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
             InitalizeDatabase(container);
             AutoMapperConfiguration.Configure();
+            PostAppHost postApp = new PostAppHost();
+            postApp.Init();
+            postApp.Container.Adapter = new WindsorContainerAdapter(container);
+            //(new PostAppHost()).Init();
         }
 
         private void InitalizeDatabase(IWindsorContainer container)
