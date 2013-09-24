@@ -335,6 +335,8 @@
     <Content Include="Areas\Admin\Views\Post\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\CHANGES.html" />
     <Content Include="Scripts\ckeditor\ckeditor.asp" />
@@ -702,6 +704,7 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\app\controller\postCtrl.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />

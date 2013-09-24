@@ -18,7 +18,7 @@ namespace MBlog.Services
             _database = database;
         }
 
-        public IEnumerable<PostResponse> Any(PostRequest postRequest)
+        public IEnumerable<PostResponse> Get(PostRequest postRequest)
         {
             var posts = _database.GetCollection<Post>("posts").FindAll();
             var result =
