@@ -224,6 +224,7 @@
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SettingViewModel.cs" />
@@ -235,7 +236,7 @@
     <Compile Include="Infrastructure\Automapper\Profiles\AdminUserProfile.cs" />
     <Compile Include="Infrastructure\Installers\ControllerInstaller.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\MongoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1035,13 +1036,13 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Information\About.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Information\Contact.cshtml" />
     <Content Include="Views\Shared\PostDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
