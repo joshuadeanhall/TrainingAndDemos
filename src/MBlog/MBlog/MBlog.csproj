@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
+    <Compile Include="Infrastructure\Automapper\Profiles\PostService.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Areas\Admin\Models\SettingViewModel.cs" />
@@ -246,7 +247,7 @@
     <Compile Include="Infrastructure\Installers\MongoInstaller.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PostRequest.cs" />
+    <Compile Include="Services\Requests\PostRequest.cs" />
     <Compile Include="Services\PostAppHost.cs" />
     <Compile Include="Services\PostResponse.cs" />
     <Compile Include="Services\PostService.cs" />
