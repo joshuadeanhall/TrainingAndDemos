@@ -39,5 +39,12 @@ namespace MBlog.Services
             var response = post.MapTo<PostResponse>();
             return response;
         }
+
+        public AboutResponse Get(AboutMeRequest aboutRequest)
+        {
+            var collection = _database.GetCollection<Setting>("settings");
+            var aboutMe = collection.FindOne(Query.EQ("Name", "About Me"));
+            return new AboutResponse {Content = aboutMe.Value};
+        }
     }
 }

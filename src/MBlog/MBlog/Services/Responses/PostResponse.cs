@@ -12,4 +12,9 @@ namespace MBlog.Services
         public string Content { get; set; }
         public DateTime PublishedOn { get; set; }
     }
+
+    public class AboutResponse
+    {
+        public string Content { get; set; }
+    }
 }

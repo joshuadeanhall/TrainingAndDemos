@@ -1,1 +1,1 @@
-﻿angular.module('postApplication', ['postServices', 'ngSanitize']);
+﻿angular.module('postApplication', ['postServices', 'aboutService', 'ngSanitize']);

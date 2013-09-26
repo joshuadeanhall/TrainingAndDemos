@@ -249,7 +249,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Requests\PostRequest.cs" />
     <Compile Include="Services\PostAppHost.cs" />
-    <Compile Include="Services\PostResponse.cs" />
+    <Compile Include="Services\Responses\PostResponse.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\WindsorContainerAdapter.cs" />
   </ItemGroup>
@@ -338,6 +338,7 @@
     <Content Include="Areas\Admin\Views\Post\Preview.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\controller\aboutMeCtrl.js" />
     <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\CHANGES.html" />

@@ -18,4 +18,8 @@ namespace MBlog.Services
         public string Id { get; set; }
     }
 
+    [Route("/about", "GET")]
+    public class AboutMeRequest
+    {
+    }
 }

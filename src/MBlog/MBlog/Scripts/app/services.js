@@ -4,3 +4,10 @@
             query: { method: 'GET', isArray: true }
         });
     });
+
+angular.module('aboutService', ['ngResource']).
+    factory('About', function ($resource) {
+        return $resource('/api/about/?format=json', {}, {
+            query: { method: 'GET', isArray: false }
+        });
+    });

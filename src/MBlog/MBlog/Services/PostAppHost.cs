@@ -5,7 +5,7 @@ namespace MBlog.Services
 {
     public class PostAppHost : AppHostBase
     {
-        public PostAppHost() : base("Post Web Services", typeof(PostService).Assembly)
+        public PostAppHost() : base("Blog Web Services", typeof(PostService).Assembly)
         {
         }
 
