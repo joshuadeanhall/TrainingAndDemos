@@ -57,7 +57,7 @@ namespace MBlog.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Blog");
         }
         
 
@@ -70,7 +70,7 @@ namespace MBlog.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Blog");
             }
         }
 
