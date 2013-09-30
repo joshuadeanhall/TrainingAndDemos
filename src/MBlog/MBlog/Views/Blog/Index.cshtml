@@ -12,7 +12,7 @@
         <h2>{{post.Title}}</h2>
         <div ng-bind-html-unsafe="post.Content"></div>
         <p>
-            <a class="btn btn-default">View Post</a>
+            <a class="btn btn-default" ng-href="/Details/{{post.PostId}}">View Post</a>
         </p>
     </div>
 </div>

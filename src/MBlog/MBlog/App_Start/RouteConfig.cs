@@ -11,6 +11,10 @@ namespace MBlog
             routes.IgnoreRoute("api/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Details",
+                url: "Details/{id}",
+                defaults: new {controller = "Blog", action = "Details"});
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Blog", action = "Index", id = UrlParameter.Optional }

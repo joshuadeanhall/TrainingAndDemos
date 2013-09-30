@@ -1,8 +1,8 @@
 ﻿'use strict';
 
 postApp.factory('Post', function($resource) {
-    return $resource('api/posts/?format=json', {}, {
-        query: { method: 'GET', isArray: true }
+    return $resource('/api/posts/:postId?format=json', {}, {
+        
     });
 });
 

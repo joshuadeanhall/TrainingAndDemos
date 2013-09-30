@@ -5,3 +5,10 @@ postApp.controller('PostCtrl', function PostCtrl($scope, Post) {
         angular.forEach(posts);
     });
 });
+
+postApp.controller('PostDetailsCtrl', function PostDetailsCtrl($scope, Post) {
+    $scope.init = function(id) {
+        $scope.id = id;
+        $scope.Post = Post.get({ postId: id });
+    };
+})
