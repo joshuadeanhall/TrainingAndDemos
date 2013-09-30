@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MBlog.Models;
 
 
 namespace MBlog.Controllers
@@ -8,6 +9,11 @@ namespace MBlog.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Details(string id)
+        {
+            return View(new PostDetailsViewModel {Id = id});
         }
     }
 }

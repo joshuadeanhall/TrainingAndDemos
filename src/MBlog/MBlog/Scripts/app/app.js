@@ -1,1 +1,4 @@
-﻿angular.module('postApplication', ['postServices', 'aboutService', 'ngSanitize']);
+﻿'use strict';
+
+var postApp = angular.module('postApplication', ['ngResource']);
+

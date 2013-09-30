@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
+    <Compile Include="Models\PostDetailsViewModel.cs" />
     <Compile Include="Infrastructure\Automapper\Profiles\PostService.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
@@ -1043,6 +1044,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Information\Contact.cshtml" />
     <Content Include="Views\Shared\PostDetails.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

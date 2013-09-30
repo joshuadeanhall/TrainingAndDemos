@@ -1,12 +1,12 @@
-﻿angular.module('postServices', ['ngResource']).
-    factory('Post', function ($resource) {
-        return $resource('api/posts/?format=json', {}, {
-            query: { method: 'GET', isArray: true }
-        });
-    });
+﻿'use strict';
 
-angular.module('aboutService', ['ngResource']).
-    factory('About', function ($resource) {
+postApp.factory('Post', function($resource) {
+    return $resource('api/posts/?format=json', {}, {
+        query: { method: 'GET', isArray: true }
+    });
+});
+
+postApp.factory('About', function ($resource) {
         return $resource('/api/about/?format=json', {}, {
             query: { method: 'GET', isArray: false }
         });
