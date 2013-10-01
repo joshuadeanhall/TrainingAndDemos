@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 using ServiceStack.ServiceHost;
 
 namespace MBlog.Services
@@ -23,19 +22,15 @@ namespace MBlog.Services
 
         public IEnumerable<PostResponse> Get(Posts postRequest)
         {
-            var posts = _database.GetCollection<Post>("posts").FindAll();
-            var result =
-                posts.Select(
-                    post =>
-                        new PostResponse { PostId = post.PostId.ToString(), Content = post.Content, PublishedOn = post.PublishDate, Title = post.Title });
+            var posts = _database.GetCollection<Post>("posts").AsQueryable().OrderByDescending(p => p.PublishDate).ToList();
+            var result = posts.MapTo<PostResponse>();
             return result;
         }
 
         public PostResponse Get(GetPost getPostRequest)
         {
             var collection = _database.GetCollection<Post>("posts");
-            var post = collection.FindOne(Query.EQ("_id", new BsonObjectId(getPostRequest.Id)));
-
+            var post = collection.AsQueryable().SingleOrDefault(p => p.PostId == new ObjectId(getPostRequest.Id));
             var response = post.MapTo<PostResponse>();
             return response;
         }
@@ -43,7 +38,7 @@ namespace MBlog.Services
         public AboutResponse Get(AboutMeRequest aboutRequest)
         {
             var collection = _database.GetCollection<Setting>("settings");
-            var aboutMe = collection.FindOne(Query.EQ("Name", "About Me"));
+            var aboutMe = collection.AsQueryable().Single(a => a.Name == "About Me");
             return new AboutResponse {Content = aboutMe.Value};
         }
     }

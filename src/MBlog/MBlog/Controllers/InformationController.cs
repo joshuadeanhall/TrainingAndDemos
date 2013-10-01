@@ -27,31 +27,25 @@ namespace MBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactViewModel contactViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(contactViewModel);
+            var collection = Database.GetCollection<Setting>("settings");
+            var toAddress = collection.FindOne(Query.EQ("Name", "Email"));
+            var userName = ConfigurationManager.AppSettings["SMTP_Username"];
+            var password = ConfigurationManager.AppSettings["SMTP_Password"];
+            var smtpServer = ConfigurationManager.AppSettings["SMTP_Server"];
+            var smtpPort = Int32.Parse(ConfigurationManager.AppSettings["SMTP_Port"]);
+            var client = new SmtpClient(smtpServer, smtpPort)
             {
-                var collection = Database.GetCollection<Setting>("settings");
-                var toAddress = collection.FindOne(Query.EQ("Name", "Email"));
-                var userName = ConfigurationManager.AppSettings["SMTP_Username"];
-                var password = ConfigurationManager.AppSettings["SMTP_Password"];
-                var smtpServer = ConfigurationManager.AppSettings["SMTP_Server"];
-                var smtpPort = Int32.Parse(ConfigurationManager.AppSettings["SMTP_Port"]);
-                var client = new SmtpClient(smtpServer, smtpPort)
-                {
-                    Credentials = new NetworkCredential(userName, password)
-                };
-                var from = new MailAddress(contactViewModel.Email, contactViewModel.Name);
-                var to = new MailAddress(toAddress.Value);
+                Credentials = new NetworkCredential(userName, password)
+            };
+            var from = new MailAddress(contactViewModel.Email, contactViewModel.Name);
+            var to = new MailAddress(toAddress.Value);
 
-                var message = new MailMessage(from, to) {Body = contactViewModel.Message, Subject = "Blog contact page"};
+            var message = new MailMessage(@from, to) {Body = contactViewModel.Message, Subject = "Blog contact page"};
 
-                client.Send(message);
+            client.Send(message);
 
-                return RedirectToAction("Index", "Blog");
-            }
-            return View(contactViewModel);
-
-
+            return RedirectToAction("Index", "Blog");
         }
-
     }
 }

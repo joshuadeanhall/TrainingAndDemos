@@ -69,7 +69,6 @@ namespace MBlog.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(object id)
         {
-
             var collection = Database.GetCollection<User>("users");
             collection.Remove(Query.EQ("_id", new BsonObjectId(id.ToString())));
             return RedirectToAction("Index");

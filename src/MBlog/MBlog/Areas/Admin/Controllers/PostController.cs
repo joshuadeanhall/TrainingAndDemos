@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
 using MBlog.Models;
 using MongoDB.Bson;
 using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 
 namespace MBlog.Areas.Admin.Controllers
 {
@@ -13,11 +15,10 @@ namespace MBlog.Areas.Admin.Controllers
 
         //
         // GET: /Admin/Post/
-
         public ActionResult Index()
         {
             var collection = Database.GetCollection<Post>("posts");
-            var posts = collection.FindAll();
+            var posts = collection.AsQueryable().OrderByDescending(p => p.PublishDate).ToList();
             return View(posts.MapTo<PostViewModel>());
         }
 

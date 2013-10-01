@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Controllers\InformationController.cs" />
+    <Compile Include="Infrastructure\Helpers\MenuHelpers.cs" />
     <Compile Include="Models\PostDetailsViewModel.cs" />
     <Compile Include="Infrastructure\Automapper\Profiles\PostService.cs" />
     <Compile Include="Models\LoginModel.cs" />

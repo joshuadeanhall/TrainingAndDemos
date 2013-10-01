@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MBlog.Areas.Admin.Models;
 using MBlog.Domain;
 using MBlog.Infrastructure.Automapper;
@@ -43,7 +39,7 @@ namespace MBlog.Areas.Admin.Controllers
         public ActionResult Edit(string id)
         {
             var collection = Database.GetCollection<Setting>("settings");
-            var setting = collection.FindOneById(new BsonObjectId(id.ToString()));
+            var setting = collection.FindOneById(new BsonObjectId(id));
             return View(setting.MapTo<SettingViewModel>());
         }
 
@@ -79,8 +75,5 @@ namespace MBlog.Areas.Admin.Controllers
             collection.Remove(Query.EQ("_id", new BsonObjectId(id)));
             return RedirectToAction("Index");
         }
-
-
-
     }
 }
