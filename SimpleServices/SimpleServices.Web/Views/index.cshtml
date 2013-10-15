@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SimpleServices.Web</title>
+
+	<style type="text/css">
+
+		body {
+			text-align: center;
+		}
+
+	</style>
+
+</head>
+    <body>
+        <img src="~/Content/nancy-logo.png" alt="Nancy logo" /><br />
+        Username: <input type="text" name="username" id="username" /> <br/>
+        Message: <input type="text" name="message" id="message"/> <br/>
+        <input type="button" id="submitMessage" value="Send"/>
+        <br/>
+        <hr/>
+        <div id="messages"></div>
+        <script src="~/Content/jquery-1.6.4.js"></script>
+        <script src="~/Content/jquery.signalR-2.0.0-rc1.js"></script>
+        <script src="http://localhost:8050/signalr/hubs"></script>
+        <script>
+            $(function () {
+                $.connection.hub.url = "http://localhost:8050/signalr";
+                var chat = $.connection.chatHub;
+
+                chat.client.messageSent = function(data) {
+                    $('#messages').text(data);
+                };
+
+                $.connection.hub.start().done(function() {
+                    $('#submitMessage').click(function () {
+                        chat.server.sendMessage($('#username').val(), $('#message').val());
+                        $('#message').val('');
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
