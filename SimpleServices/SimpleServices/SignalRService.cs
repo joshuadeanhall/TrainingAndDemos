@@ -9,7 +9,7 @@ using Microsoft.Owin.Hosting;
 
 namespace SimpleServices
 {
-    public class SignalRService : ServiceBase
+    public class SignalRService
     {
         IDisposable SignalR { get; set; }
 
@@ -21,26 +21,15 @@ namespace SimpleServices
             Console.ReadLine();
         }
 
-        public new void Stop()
+        public void Stop()
         {
             SignalR.Dispose();
 
             Thread.Sleep(1500);
         }
 
-        protected override void OnStart(string[] args)
+        protected void Dispose(bool disposing)
         {
-            Start();
-        }
-
-        protected override void OnStop()
-        {
-            Stop();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
             if (SignalR != null)
             {
                 SignalR.Dispose();

@@ -8,6 +8,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Hosting;
 using Owin;
+using Topshelf;
 
 namespace SimpleServices
 {
@@ -16,7 +17,10 @@ namespace SimpleServices
         [STAThread]
         static void Main(string[] args)
         {
-            var arg0 = args[0] ?? string.Empty;
+            string arg0 = string.Empty;
+            if (args.Length > 0)
+                arg0 = (args[0] ?? string.Empty).ToLower();
+
             if (arg0 == "-fake")
             {
                 RunFake();
@@ -30,8 +34,20 @@ namespace SimpleServices
 
         public static void Run()
         {
-            var ServicesToRun = new ServiceBase[] { new SignalRService() };
-            ServiceBase.Run(ServicesToRun);
+            HostFactory.Run(x =>
+            {
+                x.Service<SignalRService>(s =>
+                {
+                    s.ConstructUsing(name => new SignalRService());
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+                });
+                x.RunAsLocalService();
+
+                x.SetDescription("SignalR Simple Service");
+                x.SetDisplayName("SignalRSimple");
+                x.SetServiceName("SignalrRSimple");
+            });
         }
 
         public static void RunFake()
