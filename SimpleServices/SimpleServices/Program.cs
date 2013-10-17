@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
@@ -12,13 +13,33 @@ namespace SimpleServices
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            using (WebApp.Start<Startup>("http://localhost:8050/"))
+            var arg0 = args[0] ?? string.Empty;
+            if (arg0 == "-fake")
             {
-                Console.WriteLine("Server running at http://localhost:8050/");
-                Console.ReadLine();
+                RunFake();
             }
+            else
+            {
+                Run();
+            }
+            
+        }
+
+        public static void Run()
+        {
+            var ServicesToRun = new ServiceBase[] { new SignalRService() };
+            ServiceBase.Run(ServicesToRun);
+        }
+
+        public static void RunFake()
+        {
+            var service = new SignalRService();
+            service.Start();
+
+            Console.ReadLine();
         }
     }
 
