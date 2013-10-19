@@ -1,23 +1,52 @@
-﻿namespace SimpleServices.Web
+﻿using Topshelf;
+
+namespace SimpleServices.Web
 {
     using System;
-    using Nancy.Hosting.Self;
 
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            var uri =
-                new Uri("http://localhost:3579");
+            string arg0 = string.Empty;
+            if (args.Length > 0)
+                arg0 = (args[0] ?? string.Empty).ToLower();
 
-            using (var host = new NancyHost(uri))
+            if (arg0 == "-fake")
             {
-                host.Start();
-
-                Console.WriteLine("Your application is running on " + uri);
-                Console.WriteLine("Press any [Enter] to close the host.");
-                Console.ReadLine();
+                RunFake();
             }
+            else
+            {
+                Run();
+            }
+        }
+
+        public static void Run()
+        {
+            HostFactory.Run(x =>
+            {
+                x.Service<SimpleServiceWebService>(s =>
+                {
+                    s.ConstructUsing(name => new SimpleServiceWebService());
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+                });
+                x.RunAsLocalSystem();
+
+                x.SetDescription("Web Simple Service");
+                x.SetDisplayName("NancyWebSimple");
+                x.SetServiceName("NancyWebSimple");
+            });
+        }
+
+        public static void RunFake()
+        {
+            var service = new SimpleServiceWebService();
+            service.Start();
+
+            Console.ReadLine();
         }
     }
 }
