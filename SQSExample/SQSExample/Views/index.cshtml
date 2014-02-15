@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+
+<div ng-controller="MessageController">
+    <div class="form-group">
+        <label for="User">User:</label>
+        <input type="text" name="User" class="form-control" placeholder="User" />
+    </div>
+
+    <div class="form-group">
+        <label for="Message">User:</label>
+        <input type="text" name="Message" class="form-control" placeholder="Message" />
+    </div>
+
+    <input type="submit" value="Send" class="btn btn-primary" ng-click="sendMessage()" />
+    
+    <hr/>
+    
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>User</th>
+            <th>Message</th>
+            <th>Status</th>
+        </tr>
+        <tr ng-repeat="message in messages">
+            <td>{{message.user}}</td>
+            <td>{{message.message}}</td>
+            <td>{{message.status}}</td>
+        </tr>
+    </table>
+</div>
