@@ -1,1 +1,1 @@
-﻿
+﻿Stop-Service MessageService -ErrorAction SilentlyContinue

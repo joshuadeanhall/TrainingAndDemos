@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
@@ -11,32 +10,33 @@ namespace MessageService
     {
         static void Main(string[] args)
         {
-            HostFactory.Run(x =>                                 //1
+            string arg0 = string.Empty;
+            if (args.Length > 0)
+                arg0 = (args[0] ?? string.Empty).ToLower();
+
+            if (arg0 == "-fake")
             {
-                x.Service<TownCrier>(s =>                        //2
+                SignalRService service = new SignalRService();
+                service.Start();
+            }
+            else
+            {
+                HostFactory.Run(x =>
                 {
-                    s.ConstructUsing(name => new TownCrier());     //3
-                    s.WhenStarted(tc => tc.Start());              //4
-                    s.WhenStopped(tc => tc.Stop());               //5
+                    x.Service<SignalRService>(s =>
+                    {
+                        s.ConstructUsing(name => new SignalRService());
+                        s.WhenStarted(tc => tc.Start());
+                        s.WhenStopped(tc => tc.Stop());
+                    });
+                    x.RunAsLocalSystem();
+
+                    x.SetDescription("Message Service");
+                    x.SetDisplayName("MessageService");
+                    x.SetServiceName("MessageService");
+                    x.StartAutomatically();
                 });
-                x.RunAsLocalSystem();                            //6
-
-                x.SetDescription("Sample Topshelf Host");        //7
-                x.SetDisplayName("Stuff");                       //8
-                x.SetServiceName("stuff");                       //9
-            });    
+            }
         }
-    }
-
-    public class TownCrier
-    {
-        readonly Timer _timer;
-        public TownCrier()
-        {
-            _timer = new Timer(1000) { AutoReset = true };
-            _timer.Elapsed += (sender, eventArgs) => Console.WriteLine("It is {0} an all is well", DateTime.Now);
-        }
-        public void Start() { _timer.Start(); }
-        public void Stop() { _timer.Stop(); }
     }
 }

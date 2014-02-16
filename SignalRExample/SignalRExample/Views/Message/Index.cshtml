@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id ="messages"></div>
+
+<div>
+    <input id="message" type="text" />
+    <input type="button" id="submitMessage"/>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>
+    <script src="http://localhost:8010/signalr/hubs"></script>
+    <script>
+        $(function() {
+            $.connection.hub.url = "http://localhost:8010/signalr";
+            var message = $.connection.messageHub;
+
+            message.client.send = function(data) {
+                $('#messages').text(data);
+            };
+
+            $.connection.hub.start().done(function() {
+                $('#submitMessage').click(function() {
+                    message.server.sendMessage($('#message').val());
+                    $('#message').val('');
+                });
+            });
+        });
+    </script>
+}

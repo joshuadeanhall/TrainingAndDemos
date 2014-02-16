@@ -1,7 +1,13 @@
-﻿sc.exe delete MyService-service1 | Write-Host
+﻿sc.exe delete MessageService | Write-Host
 
-Start-Sleep -Second 3
+"Service is deleted." | Write-Host
+
+Start-Sleep -s 3
 
 # install is done via TopShelf's command line to install the proper type of server.
 
-& "MessageService.exe" "install" | Write-Host
+& ".\MessageService.exe" "install" | Write-Host
+
+Start-Sleep -s 3
+
+Start-Service MessageService | Write-Host
