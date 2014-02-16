@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -36,15 +38,22 @@ namespace SignalRExample
                                 .LifestyleTransient()
                                 );
 
+            container.Register(Classes.FromThisAssembly()
+                                .BasedOn<IHttpController>()
+                                .LifestyleTransient()
+                                );
+
             var customControllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(customControllerFactory);
+            GlobalConfiguration.Configuration.Services.Replace(typeof (IHttpControllerActivator),
+                new WindsorControllerActivator(container));
         }
 
         private void RegisterBus(IWindsorContainer container)
         {
             var adapter = new WindsorContainerAdapter(container);
             Configure.With(adapter)
-                      .Transport(t => t.UseAzureServiceBusInOneWayClientMode("Endpoint=sb://messageservice-ns.servicebus.windows.net/;SharedAccessKeyName=All;SharedAccessKey=/="))
+                      .Transport(t => t.UseAzureServiceBusInOneWayClientMode("Endpoint=sb://messageservice-ns.servicebus.windows.net/;SharedAccessKeyName=All;SharedAccessKey=F7wHHO3jeUhhm8/mOWhT9m3wTFGByuve6e6B9QOEx58="))
                       .MessageOwnership(o => o.FromRebusConfigurationSection())
                       .CreateBus()
                       .Start();

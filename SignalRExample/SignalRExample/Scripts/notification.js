@@ -15,10 +15,19 @@
     };
 
     $.connection.hub.start().done(function() {
-        $('#submitMessage').click(function() {
-            message.server.sendMessage($('#message').val());
-            $('#message').val('');
-        });
+        
     });
 
+});
+
+$('#submitMessage').click(function () {
+    $.ajax({
+        type: "POST",
+        url: "/api/notification",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify($('#message').val()),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+    $('#message').val('');
 });

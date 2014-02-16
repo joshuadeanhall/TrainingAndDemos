@@ -15,9 +15,6 @@ namespace SignalRExample.Controllers
         // GET: /Message/
         public ActionResult Index()
         {
-            var message = new NotificationMessage();
-            message.Message = "test1234";
-            Bus.Send(message);
             return View();
         }
 
