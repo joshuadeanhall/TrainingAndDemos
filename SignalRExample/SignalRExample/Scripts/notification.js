@@ -9,7 +9,7 @@
         "extendedTimeOut": 1000
     };
     $.connection.hub.url = "http://localhost:8010/signalr";
-    $.connection.hub.qs = 'username=jhall';
+    $.connection.hub.qs = 'username=' + userName;
     var message = $.connection.messageHub;
     message.client.send = function(title, messageBody) {
         toastr.success(messageBody, title);
