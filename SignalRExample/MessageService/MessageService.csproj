@@ -99,8 +99,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\ConnectionMapping.cs" />
     <Compile Include="MessageHub.cs" />
-    <Compile Include="NotificationMessageHandler.cs" />
+    <Compile Include="Handlers\NotificationMessageHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalRService.cs" />

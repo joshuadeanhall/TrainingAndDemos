@@ -9,9 +9,10 @@
         "extendedTimeOut": 1000
     };
     $.connection.hub.url = "http://localhost:8010/signalr";
+    $.connection.hub.qs = 'username=jhall';
     var message = $.connection.messageHub;
-    message.client.send = function(data) {
-        toastr.success(data, 'Toast Received');
+    message.client.send = function(title, messageBody) {
+        toastr.success(messageBody, title);
     };
 
     $.connection.hub.start().done(function() {

@@ -27,7 +27,7 @@ namespace SignalRExample.Api
         // POST api/<controller>
         public void Post([FromBody]string value)
         {
-            Bus.Send(new NotificationMessage {Message = value});
+            Bus.Send(new NotificationMessage {Message = value, Title = "Global Message"});
         }
 
         // PUT api/<controller>/5
