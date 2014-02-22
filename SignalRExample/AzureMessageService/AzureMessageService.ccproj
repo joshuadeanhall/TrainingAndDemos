@@ -5,14 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>2.2</ProductVersion>
-    <ProjectGuid>5a42b35a-83fa-47b0-bc3a-9b19fef38292</ProjectGuid>
+    <ProjectGuid>22f64681-9d4d-4f61-b601-f881e1757f35</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AzureReportService</RootNamespace>
-    <AssemblyName>AzureReportService</AssemblyName>
+    <RootNamespace>AzureMessageService</RootNamespace>
+    <AssemblyName>AzureMessageService</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>AzureReportService</Name>
-    <PackageEnableRemoteDebugger>False</PackageEnableRemoteDebugger>
+    <Name>AzureMessageService</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +56,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PublishProfile Include="Profiles\reportservicexampleProduction.azurePubxml" />
+    <PublishProfile Include="Profiles\messageserviceexampleProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

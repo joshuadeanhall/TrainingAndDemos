@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -15,8 +16,11 @@ namespace ReportService
 {
     public class ReportService
     {
+        ManualResetEvent CompletedEvent = new ManualResetEvent(false);
+
         public void Start()
         {
+            System.Diagnostics.Trace.TraceError("ZOMG THIS IS BAD");
             var connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
             var container = new WindsorContainer();
             var adapter = new WindsorContainerAdapter(container);
@@ -29,6 +33,7 @@ namespace ReportService
                       .MessageOwnership(o => o.FromRebusConfigurationSection())
                       .CreateBus()
                       .Start();
+            CompletedEvent.WaitOne();
         }
 
         public void Stop()
