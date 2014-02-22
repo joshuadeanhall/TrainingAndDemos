@@ -13,7 +13,6 @@ namespace MessageService
             foreach (var id in MessageHub.Connections.GetConnections(message.UserName))
             {
                 hub.Clients.Client(id).Send(message.Title, message.Message);
-                //hub.Clients.All.Send(message.Title, message.Message);
             }
         }
     }

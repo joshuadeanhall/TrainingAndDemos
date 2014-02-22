@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using Messages;
 using Rebus;
@@ -27,17 +23,7 @@ namespace SignalRExample.Api
         // POST api/<controller>
         public void Post([FromBody]string value)
         {
-            Bus.Send(new NotificationMessage {Message = value, Title = "Global Message", UserName = User.Identity.Name});
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            Bus.Send(new GlobalNotificationMessage {Message = value, Title = "Global Message"});
         }
     }
 }
