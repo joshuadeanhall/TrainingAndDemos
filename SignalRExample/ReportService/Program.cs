@@ -1,38 +1,22 @@
-﻿using Topshelf;
+﻿using System;
+using Microsoft.WindowsAzure.ServiceRuntime;
+using Topshelf;
 
 namespace ReportService
 {
-    class Program
+    class Program : RoleEntryPoint
     {
         static void Main(string[] args)
         {
-            string arg0 = string.Empty;
-            if (args.Length > 0)
-                arg0 = (args[0] ?? string.Empty).ToLower();
+            var service = new ReportService();
+            service.Start();
+            Console.ReadLine();
+        }
 
-            if (arg0 == "-fake")
-            {
-                var service = new ReportService();
+        public override void Run()  /* Worker Role entry point */
+        {
+            var service = new ReportService();
                 service.Start();
-            }
-            else
-            {
-                HostFactory.Run(x =>
-                {
-                    x.Service<ReportService>(s =>
-                    {
-                        s.ConstructUsing(name => new ReportService());
-                        s.WhenStarted(tc => tc.Start());
-                        s.WhenStopped(tc => tc.Stop());
-                    });
-                    x.RunAsLocalSystem();
-
-                    x.SetDescription("Report Service");
-                    x.SetDisplayName("ReportService");
-                    x.SetServiceName("ReportService");
-                    x.StartAutomatically();
-                });
-            }
         }
     }
 }

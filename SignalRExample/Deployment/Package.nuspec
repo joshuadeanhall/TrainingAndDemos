@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>    
+  </metadata>
+  <files>
+    <file src="..\AzureReportService\bin\Release\app.publish\*.*" target="" />
+  </files>
+</package>
