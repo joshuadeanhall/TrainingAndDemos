@@ -15,6 +15,6 @@
     </description>
   </metadata>
   <files>
-    <file src=".\SignalRExample\AzureReportService\bin\Debug\*.*" target="" />
+    <file src=".\SignalRExample\AzureReportService\bin\Debug\app.publish\*.*" target="" />
   </files>
 </package>
