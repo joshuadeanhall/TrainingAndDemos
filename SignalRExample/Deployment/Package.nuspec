@@ -3,6 +3,6 @@
   <metadata>    
   </metadata>
   <files>
-    <file src="..\AzureReportService\bin\Release\app.publish\*.*" target="" />
+    <file src="..\AzureReportService\bin\Release\*.*" target="" />
   </files>
 </package>
