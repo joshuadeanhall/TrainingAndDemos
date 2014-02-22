@@ -27,9 +27,9 @@ namespace ReportService
                     });
                     x.RunAsLocalSystem();
 
-                    x.SetDescription("Message Service");
-                    x.SetDisplayName("MessageService");
-                    x.SetServiceName("MessageService");
+                    x.SetDescription("Report Service");
+                    x.SetDisplayName("ReportService");
+                    x.SetServiceName("ReportService");
                     x.StartAutomatically();
                 });
             }
