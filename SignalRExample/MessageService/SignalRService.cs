@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.Owin.Hosting;
+using Microsoft.WindowsAzure;
 using Rebus;
 using Rebus.AzureServiceBus.Queues;
 using Rebus.Castle.Windsor;
@@ -13,7 +14,8 @@ namespace MessageService
     {
         public void Start()
         {
-            string url = "http://localhost:8010";
+            var connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
+            string url = CloudConfigurationManager.GetSetting("SignalRUrl"); 
             var container = new WindsorContainer();
             var adapter = new WindsorContainerAdapter(container);
             container.Register(

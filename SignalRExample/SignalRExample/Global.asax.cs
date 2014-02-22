@@ -11,9 +11,11 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Microsoft.WindowsAzure;
 using Rebus.AzureServiceBus.Queues;
 using Rebus.Castle.Windsor;
 using Rebus.Configuration;
+using SignalRExample.Filters;
 using SignalRExample.Infrastructure;
 
 namespace SignalRExample
@@ -27,6 +29,7 @@ namespace SignalRExample
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new ConfigActionFilter());
 
             var container = new WindsorContainer();
             
@@ -51,9 +54,10 @@ namespace SignalRExample
 
         private void RegisterBus(IWindsorContainer container)
         {
+            var connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
             var adapter = new WindsorContainerAdapter(container);
             Configure.With(adapter)
-                      .Transport(t => t.UseAzureServiceBusInOneWayClientMode("Endpoint=sb://messageservice-ns.servicebus.windows.net/;SharedAccessKeyName=All;SharedAccessKey=F7wHHO3jeUhhm8/mOWhT9m3wTFGByuve6e6B9QOEx58="))
+                      .Transport(t => t.UseAzureServiceBusInOneWayClientMode(connectionString))
                       .MessageOwnership(o => o.FromRebusConfigurationSection())
                       .CreateBus()
                       .Start();
