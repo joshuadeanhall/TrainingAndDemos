@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Cors;
 using Owin;
 
-namespace MessageService
+namespace MessageServiceWeb
 {
-    internal class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {

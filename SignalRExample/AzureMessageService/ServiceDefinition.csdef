@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="AzureMessageService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-10.2.2">
-  <WorkerRole name="ReportService" vmsize="Small">
+  <WorkerRole name="MessageService" vmsize="Small">
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>

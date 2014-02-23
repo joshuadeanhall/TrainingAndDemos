@@ -44,7 +44,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/signalr")
-    <script src="http://localhost:8010/signalr/hubs"></script>
+    <script src="@(ViewBag.SignalRUrl)/hubs"></script>
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/notification")
 </body>

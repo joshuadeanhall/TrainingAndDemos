@@ -37,20 +37,24 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ReportService\ReportService.csproj">
-      <Name>ReportService</Name>
-      <Project>{d2ae54d1-81cd-4adb-9d1d-8b6254da199e}</Project>
+    <ProjectReference Include="..\MessageService\MessageService.csproj">
+      <Name>MessageService</Name>
+      <Project>{c208dcbd-737b-42ca-b37b-24084f7a9eca}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
-      <RoleName>ReportService</RoleName>
+      <RoleName>MessageService</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MessageServiceContent\" />
     <Folder Include="Profiles" />
     <Folder Include="ReportServiceContent\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MessageServiceContent\diagnostics.wadcfg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ReportServiceContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>

@@ -18,5 +18,7 @@
     <AzureStorageAccountLabel>octopusnotification</AzureStorageAccountLabel>
     <AzureStorageAccountName>octopusnotification</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <EnableRemoteDebugger>True</EnableRemoteDebugger>
+    <RemoteDebuggerConnectorCertificateThumbprint>F9C1629066EC0CEFDD998989E2F5F24B521A4574</RemoteDebuggerConnectorCertificateThumbprint>
   </PropertyGroup>
 </Project>

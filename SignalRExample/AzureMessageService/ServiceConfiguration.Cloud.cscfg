@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="AzureMessageService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
-  <Role name="ReportService">
+  <Role name="MessageService">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=octopusnotification;AccountKey=wX2Tet5/RXnRpWIDv+Q0ruMevc/OGMW9Gi0tNCkv+nWkPR1eYP3kq6uBvjLbQ1g8aSF6xHcHU5/mJ5vSoztpAw==" />

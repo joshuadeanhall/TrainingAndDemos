@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.Owin.Hosting;
@@ -12,8 +14,10 @@ namespace MessageService
 {
     public class SignalRService
     {
+        ManualResetEvent CompletedEvent = new ManualResetEvent(false);
         public void Start()
         {
+            System.Diagnostics.Trace.TraceError("ZOMG THIS IS BAD");
             var connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
             string url = CloudConfigurationManager.GetSetting("SignalRUrl"); 
             var container = new WindsorContainer();
@@ -23,15 +27,21 @@ namespace MessageService
                 Classes.FromThisAssembly().BasedOn(typeof(IHandleMessages<>)).WithServiceBase().LifestyleTransient()
             );
             Configure.With(adapter)
-                      .Transport(t => t.UseAzureServiceBusAndGetInputQueueNameFromAppConfig("Endpoint=sb://messageservice-ns.servicebus.windows.net/;SharedAccessKeyName=All;SharedAccessKey=F7wHHO3jeUhhm8/mOWhT9m3wTFGByuve6e6B9QOEx58="))
+                      .Transport(t => t.UseAzureServiceBusAndGetInputQueueNameFromAppConfig(connectionString))
                       .MessageOwnership(o => o.FromRebusConfigurationSection())
                       .CreateBus()
                       .Start();
-
-            using (WebApp.Start(url))
+            try
             {
-                Console.WriteLine("Server running on {0}", url);
-                Console.ReadLine();
+                using (WebApp.Start(url))
+                {
+                    Console.WriteLine("Server running on {0}", url);
+                    CompletedEvent.WaitOne();
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError("An error occured with webappstart " + ex.Message);
             }
         }
 

@@ -18,7 +18,7 @@ namespace SignalRExample.Controllers
 
         //
         // POST: /Report/Create
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Create(ReportViewModel model)
         {
             // TODO: Add insert logic here
