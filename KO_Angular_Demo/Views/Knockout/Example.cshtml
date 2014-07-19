@@ -8,33 +8,56 @@
 
 
 <p>
-    <a href="">Create</a>
+    <a data-bind="click: create">Create</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Manager
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody data-bind="">
-        <tr>
-            <td>
-                Name here
-            </td>
-            <td>
-               Manager Here
-            </td>
-            <td>
-                Edit | Details | Delete
-            </td>
-        </tr>
-    
+<div data-bind="template: { name: currentTemplate, data: currentModel }"></div>
+
+
+<script type="text/html" id="list">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Manager
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: projects">
+            <tr>
+                <td>
+                    <span data-bind="text: name"></span>
+                </td>
+                <td>
+                    Manager Here
+                </td>
+                <td>
+                    Edit | Details | Delete
+                </td>
+            </tr>
+
         </tbody>
 
-</table>
+    </table>
+</script>
+
+<script type="text/html" id="create">
+    Name: <input data-bind="value: name"/>
+    Effort: <input data-bind="value: effort" />
+    Cost: <input data-bind="value: cost" />
+</script>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            var model = new ProjectViewModel();
+            ko.applyBindings(model);
+            model.load();
+        })
+    </script>
+}
+@Scripts.Render("~/bundles/project")

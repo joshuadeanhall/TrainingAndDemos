@@ -23,19 +23,20 @@ namespace KO_Angular_Demo.Api
         // GET: api/Project
         public IEnumerable<Project> Get()
         {
-            var collection = _mongoDatabase.GetCollection<Project>("collectionname");
+            var collection = _mongoDatabase.GetCollection<Project>("projects");
             return collection.AsQueryable().Where(c => c.ProjectManager == User.Identity.Name).ToList();
         }
 
         // GET: api/Project/5
-        public string Get(int id)
+        public Project Get(int id)
         {
-            return "value";
+            return _mongoDatabase.GetCollection<Project>("projects").AsQueryable<Project>().FirstOrDefault(p => p.Id == id);
         }
 
         // POST: api/Project
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Project value)
         {
+            _mongoDatabase.GetCollection<Project>("projects").Insert(value);
         }
 
         // PUT: api/Project/5

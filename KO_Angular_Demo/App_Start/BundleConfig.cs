@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using MongoDB.Driver.Linq;
 
 namespace KO_Angular_Demo
 {
@@ -27,9 +28,20 @@ namespace KO_Angular_Demo
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/libraries").Include(
+                "~/Scripts/underscore.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/project").Include(
+                "~/Scripts/knockout-{version}.js",
+                "~/Scripts/Knockout/Project/createprojectviewmodel.js",
+                "~/Scripts/Knockout/Project/projectlistviewmodel.js",
+                "~/Scripts/Knockout/Project/projectviewmodel.js"
+                ));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
