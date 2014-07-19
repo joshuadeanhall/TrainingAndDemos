@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD7AA0
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KO_Angular_Demo.Domain", "KO_Angular_Demo.Domain\KO_Angular_Demo.Domain.csproj", "{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -176,6 +176,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ProjectsController.cs" />
+    <Compile Include="Api\TasksController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -184,7 +186,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AngularController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KnockoutController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -552,6 +556,9 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Knockout\Index.cshtml" />
+    <Content Include="Views\Angular\Index.cshtml" />
+    <Content Include="Views\Knockout\Example.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -562,6 +569,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KO_Angular_Demo.Domain\KO_Angular_Demo.Domain.csproj">
+      <Project>{41251F4B-DE4F-49E1-8B0F-2AF20585EEB5}</Project>
+      <Name>KO_Angular_Demo.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
