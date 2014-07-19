@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using KO_Angular_Demo.Domain;
+using KO_Angular_Demo.Infrastructure.Automapper;
+using KO_Angular_Demo.Models;
+using Microsoft.AspNet.Identity;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
@@ -13,29 +16,35 @@ namespace KO_Angular_Demo.Api
     public class ProjectsController : ApiController
     {
         private readonly MongoDatabase _mongoDatabase;
+        private readonly ApplicationUserManager _userManager;
 
-        public ProjectsController(MongoDatabase mongoDatabase)
+        public ProjectsController(MongoDatabase mongoDatabase, ApplicationUserManager userManager)
         {
             if (mongoDatabase == null) throw new ArgumentNullException("mongoDatabase");
             _mongoDatabase = mongoDatabase;
+            _userManager = userManager;
         }
 
         // GET: api/Project
-        public IEnumerable<Project> Get()
+        public IEnumerable<ProjectViewModel> Get()
         {
             var collection = _mongoDatabase.GetCollection<Project>("projects");
-            return collection.AsQueryable().Where(c => c.ProjectManager == User.Identity.Name).ToList();
+            var user = _userManager.FindById(User.Identity.GetUserId());
+            var projects = collection.AsQueryable().Where(c => c.ProjectManager == user).ToList();
+            return projects.MapTo<ProjectViewModel>();
         }
 
         // GET: api/Project/5
         public Project Get(int id)
         {
-            return _mongoDatabase.GetCollection<Project>("projects").AsQueryable<Project>().FirstOrDefault(p => p.Id == id);
+            return _mongoDatabase.GetCollection<Project>("projects").AsQueryable<Project>().FirstOrDefault(p => p.Effort == id);
         }
 
         // POST: api/Project
         public void Post([FromBody]Project value)
         {
+            var user = _userManager.FindById(User.Identity.GetUserId());
+            value.ProjectManager = user;
             _mongoDatabase.GetCollection<Project>("projects").Insert(value);
         }
 

@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using KO_Angular_Demo.Infrastructure.Automapper.Profiles;
 
 namespace KO_Angular_Demo
 {
@@ -18,6 +20,7 @@ namespace KO_Angular_Demo
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Mapper.AddProfile(new ProjectProfile());
         }
     }
 }
