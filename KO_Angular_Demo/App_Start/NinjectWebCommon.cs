@@ -1,3 +1,9 @@
+using System.Configuration;
+using KO_Angular_Demo.Models;
+using Microsoft.AspNet.Identity;
+using MongoDB.AspNet.Identity;
+using MongoDB.Driver;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(KO_Angular_Demo.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(KO_Angular_Demo.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +67,24 @@ namespace KO_Angular_Demo.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            var connectionstring = ConfigurationManager.AppSettings.Get("MongoDatabaseUrl") ??
+                       ConfigurationManager.AppSettings.Get("MONGOHQ_URL") ??
+                       ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
+            var url = new MongoUrl(connectionstring);
+            var client = new MongoClient(url);
+            var server = client.GetServer();
+            //TODO pull blog name from app.config
+            kernel.Bind<MongoDatabase>().ToConstant(server.GetDatabase(url.DatabaseName)).InRequestScope();
+
+            kernel.Bind<UserStore<ApplicationUser>>()
+                .ToMethod(c => new UserStore<ApplicationUser>(kernel.Get<MongoDatabase>()))
+                .InRequestScope();
+
+            kernel.Bind<UserManager<ApplicationUser>>().To<UserManager<ApplicationUser>>().InRequestScope();
+
+            kernel.Bind<ApplicationUserManager>()
+                .ToMethod(u => new ApplicationUserManager(kernel.Get<UserStore<ApplicationUser>>()));
+
         }        
     }
 }
