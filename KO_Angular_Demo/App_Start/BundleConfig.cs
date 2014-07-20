@@ -39,6 +39,12 @@ namespace KO_Angular_Demo
                 "~/Scripts/Knockout/Project/projectviewmodel.js"
                 ));
 
+             bundles.Add(new ScriptBundle("~/bundles/angularProject").Include("~/Scripts/angular.js",
+                    "~/Scripts/angular-route.js",
+                    "~/Scripts/Angular/app.js",
+                    "~/Scripts/Angular/routes.js"
+                 ));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = false;

@@ -237,6 +237,9 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Angular\app.js" />
+    <Content Include="Scripts\Angular\Project\Views\projectlist.html" />
+    <Content Include="Scripts\Angular\routes.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />
@@ -581,6 +584,7 @@
     <Content Include="Views\Angular\Index.cshtml" />
     <Content Include="Views\Knockout\Example.cshtml" />
     <Content Include="Scripts\underscore-min.map" />
+    <Content Include="Views\Angular\Example.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

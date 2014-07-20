@@ -13,5 +13,10 @@ namespace KO_Angular_Demo.Controllers
         {
             return View();
         }
+
+        public ActionResult Example()
+        {
+            return View();
+        }
     }
 }
