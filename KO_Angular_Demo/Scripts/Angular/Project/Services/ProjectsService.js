@@ -5,11 +5,9 @@ angular.module('project').factory('Projects', [
         var Projects = $resource('/api/projects', {}, {
 
         });
-
         Projects.getAll = function() {
             Projects.query();
         }
-
         return Projects;
     }
 ]);

@@ -45,7 +45,8 @@ namespace KO_Angular_Demo
                     "~/Scripts/Angular/app.js",
                     "~/Scripts/Angular/routes.js",
                     "~/Scripts/Angular/Project/Controllers/ProjectListCtrl.js",
-                    "~/Scripts/Angular/Project/Services/ProjectsService.js"
+                    "~/Scripts/Angular/Project/Services/ProjectsService.js",
+                    "~/Scripts/Angular/Project/Controllers/ProjectCreateCtrl.js"
                  ));
 
             // Set EnableOptimizations to false for debugging. For more information,

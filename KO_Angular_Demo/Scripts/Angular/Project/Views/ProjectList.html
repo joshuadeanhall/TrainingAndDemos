@@ -1,3 +1,44 @@
-﻿This is a test.
+﻿<div class="col-lg-4">
+    <a ng-click="create()">Create</a>
+</div>
+<div class="col-lg-offset-9"><input class="form-control" id="search" placeholder="Search" ng-model="search" /></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Manager
+            </th>
+            <th>
+                Effort
+            </th>
+            <th>
+                Cost
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="project in projects | filter:search">
+        <tr>
+            <td>
+                <span>{{ project.Name }}</span>
+            </td>
+            <td>
+                <span>{{ project.Manager }}</span>
+            </td>
+            <td>
+                <span>{{ project.Effort }}</span>
+            </td>
+            <td>
+                <span>{{ project.Cost }}</span>
+            </td>
+            <td>
+                Edit | Details | Delete
+            </td>
+        </tr>
 
-<div ng-controller="ProjectsListCtrl"></div>
+    </tbody>
+
+</table>
