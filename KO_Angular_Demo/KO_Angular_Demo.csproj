@@ -239,9 +239,14 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Angular\app.js" />
     <Content Include="Scripts\Angular\Project\Controllers\ProjectCreateCtrl.js" />
+    <Content Include="Scripts\Angular\Project\Controllers\ProjectCtrl.js" />
     <Content Include="Scripts\Angular\Project\Controllers\ProjectListCtrl.js" />
+    <Content Include="Scripts\Angular\Project\Controllers\TaskCtrl.js" />
     <Content Include="Scripts\Angular\Project\Services\ProjectsService.js" />
+    <Content Include="Scripts\Angular\Project\Services\TasksService.js" />
     <Content Include="Scripts\Angular\Project\Views\create.html" />
+    <Content Include="Scripts\Angular\Project\Views\createtask.html" />
+    <Content Include="Scripts\Angular\Project\Views\projectdetails.html" />
     <Content Include="Scripts\Angular\Project\Views\projectlist.html" />
     <Content Include="Scripts\Angular\routes.js" />
     <Content Include="Scripts\bootstrap.js" />

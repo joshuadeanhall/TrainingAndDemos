@@ -8,6 +8,7 @@ using KO_Angular_Demo.Domain;
 using KO_Angular_Demo.Infrastructure.Automapper;
 using KO_Angular_Demo.Models;
 using Microsoft.AspNet.Identity;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
@@ -35,9 +36,11 @@ namespace KO_Angular_Demo.Api
         }
 
         // GET: api/Project/5
-        public Project Get(int id)
+        public ProjectViewModel Get(string id)
         {
-            return _mongoDatabase.GetCollection<Project>("projects").AsQueryable<Project>().FirstOrDefault(p => p.Effort == id);
+            var project = _mongoDatabase.GetCollection<Project>("projects").AsQueryable<Project>().FirstOrDefault(p => p.Id == new ObjectId(id));
+            var projectViewModel = project.MapTo<ProjectViewModel>();
+            return projectViewModel;
         }
 
         // POST: api/Project

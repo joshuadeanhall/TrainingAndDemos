@@ -5,6 +5,9 @@ angular.module('project').controller('ProjectsListCtrl', ['$scope', 'Projects', 
     
     $scope.create = function () {
         $location.path('/create');
-        //alert('create');
+    }
+
+    $scope.showDetails = function(project) {
+        $location.path('/project/' + project.Id);
     }
 }]);

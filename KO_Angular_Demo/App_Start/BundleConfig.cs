@@ -46,7 +46,10 @@ namespace KO_Angular_Demo
                     "~/Scripts/Angular/routes.js",
                     "~/Scripts/Angular/Project/Controllers/ProjectListCtrl.js",
                     "~/Scripts/Angular/Project/Services/ProjectsService.js",
-                    "~/Scripts/Angular/Project/Controllers/ProjectCreateCtrl.js"
+                    "~/Scripts/Angular/Project/Controllers/ProjectCreateCtrl.js",
+                    "~/Scripts/Angular/Project/Controllers/ProjectCtrl.js",
+                    "~/Scripts/Angular/Project/Controllers/TaskCtrl.js",
+                    "~/Scripts/Angular/Project/Services/TasksService.js"
                  ));
 
             // Set EnableOptimizations to false for debugging. For more information,
