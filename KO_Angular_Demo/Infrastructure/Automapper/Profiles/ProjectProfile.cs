@@ -12,7 +12,8 @@ namespace KO_Angular_Demo.Infrastructure.Automapper.Profiles
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Project, ProjectViewModel>();
+            Mapper.CreateMap<Project, ProjectViewModel>()
+                .ForMember(src => src.UserName, opt => opt.MapFrom(src => src.ProjectManager.UserName));
             Mapper.CreateMap<ProjectViewModel, Project>();
         }
     }

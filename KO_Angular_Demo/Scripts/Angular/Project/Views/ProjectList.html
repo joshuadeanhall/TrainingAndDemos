@@ -26,13 +26,13 @@
                 <span>{{ project.Name }}</span>
             </td>
             <td>
-                <span>{{ project.Manager }}</span>
+                <span>{{ project.UserName }}</span>
             </td>
             <td>
                 <span>{{ project.Effort }}</span>
             </td>
             <td>
-                <span>{{ project.Cost }}</span>
+                <span>{{ project.Cost | currency }}</span>
             </td>
             <td>
                 Edit | Details | Delete

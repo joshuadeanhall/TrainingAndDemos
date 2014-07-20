@@ -37,6 +37,9 @@ var Project = function () {
     self.name = ko.observable();
     self.manager = ko.observable();
     self.id = ko.observable();
-    self.cost = ko.observable();
+    self.cost = ko.observable(0);
     self.effort = ko.observable();
+    self.formattedCost = ko.computed(function() {
+        return '$' + self.cost().toFixed(2);
+    });
 }
