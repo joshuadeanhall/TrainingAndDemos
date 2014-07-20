@@ -41,8 +41,11 @@ namespace KO_Angular_Demo
 
              bundles.Add(new ScriptBundle("~/bundles/angularProject").Include("~/Scripts/angular.js",
                     "~/Scripts/angular-route.js",
+                    "~/Scripts/angular-resource.js",
                     "~/Scripts/Angular/app.js",
-                    "~/Scripts/Angular/routes.js"
+                    "~/Scripts/Angular/routes.js",
+                    "~/Scripts/Angular/Project/Controllers/ProjectListCtrl.js",
+                    "~/Scripts/Angular/Project/Services/ProjectsService.js"
                  ));
 
             // Set EnableOptimizations to false for debugging. For more information,

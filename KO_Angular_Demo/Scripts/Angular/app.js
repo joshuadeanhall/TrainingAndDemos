@@ -1,3 +1,3 @@
 ﻿'use strict';
 
-angular.module('project', ['ngRoute'])
+angular.module('project', ['ngRoute', 'ngResource'])

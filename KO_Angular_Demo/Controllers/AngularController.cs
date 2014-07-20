@@ -14,7 +14,18 @@ namespace KO_Angular_Demo.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Example()
+        {
+            return View();
+        }
+
+        public ActionResult Resource()
+        {
+            return View();
+        }
+
+        public ActionResult Additional()
         {
             return View();
         }

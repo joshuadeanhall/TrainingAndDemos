@@ -13,7 +13,7 @@ namespace KO_Angular_Demo.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public ActionResult Example()
         {
             return View();
