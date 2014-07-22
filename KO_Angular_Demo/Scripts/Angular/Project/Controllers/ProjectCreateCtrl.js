@@ -7,4 +7,7 @@ angular.module('project').controller('ProjectCreateCtrl', ['$scope', 'Projects',
         });
         
     }
+    $scope.back = function() {
+        $location.path('/');
+    }
 }]);

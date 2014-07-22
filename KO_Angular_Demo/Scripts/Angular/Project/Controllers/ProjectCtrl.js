@@ -6,4 +6,7 @@ angular.module('project').controller('ProjectCtrl', ['$scope', 'Projects', '$loc
     $scope.create = function () {
         $location.path('/project/' + $routeParams.projectId + '/task/create');
     }
+    $scope.back = function() {
+        $location.path('/');
+    }
 }]);

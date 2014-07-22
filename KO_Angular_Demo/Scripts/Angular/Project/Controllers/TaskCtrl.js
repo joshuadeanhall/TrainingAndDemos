@@ -9,4 +9,7 @@ angular.module('project').controller('TaskCtrl', ['$scope', 'Tasks', '$location'
             $location.path('/project/' + $scope.routeParams.projectId);
         });
     }
+    $scope.back = function() {
+        $location.path('/project/' + $scope.routeParams.projectId);
+    }
 }]);
