@@ -9,33 +9,61 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("ObjectJson", "ObjectJson", "Organization")</li>
-                    <li>@Html.ActionLink("GetManagementByName", "GetManagementByName", "Organization")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <script type="text/x-handlebars">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>{{#link-to 'managers.jsonrepresentation'}}ObjectJson{{/link-to}}</li>
+                        <li>{{#link-to 'managers'}}Managers{{/link-to}}</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
+        <div class="container body-content">
+            <br />
+            {{outlet}}
+            @RenderBody()
+        </div>
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name="managers">
+        {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="managers/index">
+        {{input value=search}}
+        <input type="submit" {{action "query" }}>
+        <br />
+        <ul id="todo-list">
+            {{#each}}
+                <li>{{Name}}</li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="managers/jsonrepresentation">
+        <input type="submit" {{action "load" }} value="Load">
+        <br />
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        {{jsonString}}
+    </script>
+
+
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

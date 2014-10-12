@@ -28,13 +28,17 @@ namespace Neo4jExample
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/ember").Include(
-                "~/Scripts/handlesbars-{version}.js",
+                "~/Scripts/handlebars-1.1.2.js",
                 "~/Scripts/ember-{version}.js",
-                "~/app/app.js"));
+                "~/Scripts/ember-data.js",
+                "~/app/app.js",
+                "~/app/controllers/ManagersController.js",
+                "~/app/controllers/ManagersJsonrepresentationController.js",
+                "~/app/models/Manager.js"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
