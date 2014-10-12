@@ -27,6 +27,11 @@ namespace Neo4jExample
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ember").Include(
+                "~/Scripts/handlesbars-{version}.js",
+                "~/Scripts/ember-{version}.js",
+                "~/app/app.js"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
