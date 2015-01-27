@@ -1,0 +1,95 @@
+﻿@model ProjectViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#projectCharges').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+            
+            $('#projectTasks').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+        });
+
+        $(document).ready(function () {
+            $("#createTask").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Create Task",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($("#createTaskForm").attr("action"), {'ConcreteModelType': $("#taskModelType").val(), 'Project.Id': $("#createTaskProjectId").val() });
+            });
+
+            $(".close").live("click", function (e) {
+                e.preventDefault();
+                $(this).closest(".dialog").dialog("close");
+            });
+
+            $(".editTask").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Edit Task",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"));
+            });
+        });
+
+
+
+    </script>
+}
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Project</legend>
+
+    <div class="display-label" id="project-title">
+        @Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label" id="project-estimatedhours">
+        @Html.DisplayNameFor(model => model.EstimatedHours): @Html.DisplayFor(model => model.EstimatedHours)
+    </div>
+
+    <div class="display-label" id="project-customer">
+        @Html.DisplayNameFor(model => model.CustomerName): @Html.DisplayFor(model => model.CustomerName)
+    </div>
+    @Html.DisplayForModel()
+
+    @Html.ActionLink("Mark Complete", "CompleteProject", new { id = Model.Id })
+</fieldset>
+<!-- In future change to Render Action or AJAX -->
+@{ Html.RenderPartial("_ProjectTasks", Model); }
+
+<br />
+@Html.Partial("_ProjectCharges", Model.Charges)
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

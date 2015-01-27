@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Statuos.Web.Models.ProjectViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#projects').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#createProject").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Create Project",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($("#createProjectForm").attr("action"), {'ConcreteModelType': $("#modelType").val() });
+
+            });
+        })
+
+    </script>
+
+
+}
+<h2>Index</h2>
+<p>
+    @using (Html.BeginForm("CreateProjectType", "Project", FormMethod.Post, new { id = "createProjectForm" }))
+    {
+        @Html.DropDownList("ConcreteModelType", ViewBag.ProjectTypes as SelectList, new { id = "modelType" })
+        <input type="submit" id="createProject" value="Create" />
+        
+    }
+</p>
+<table id="projects">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectType)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

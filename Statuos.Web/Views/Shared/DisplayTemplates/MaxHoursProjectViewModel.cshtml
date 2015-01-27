@@ -1,0 +1,9 @@
+﻿@model Statuos.Web.Models.MaxHoursProjectViewModel
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.MaxHours)
+</div>
+<div class="editor-field">
+    @Html.DisplayFor(model => model.MaxHours)
+    @Html.ValidationMessageFor(model => model.MaxHours)
+</div>

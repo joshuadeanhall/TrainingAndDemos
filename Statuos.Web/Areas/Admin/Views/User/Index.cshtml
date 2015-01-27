@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Statuos.Web.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#users').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#createUser").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Create User",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"))
+            });
+
+        });
+
+    </script>
+
+
+}
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { id = "createUser" })
+</p>
+<table id ="users">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+        </tbody>
+</table>

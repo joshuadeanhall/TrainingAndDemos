@@ -1,0 +1,105 @@
+﻿@model TaskViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#taskCharges').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $('#users').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": true,
+                "bInfo": false,
+                "bAutoWidth": false
+            });
+
+            $("#addCharge").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Charge Hours",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"))
+            });
+            $("#assignUser").live("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: "Assign User",
+                        close: function () { $(this).remove() },
+                        modal: true
+                    })
+                    .load($(this).attr("href"))
+            });
+        });
+    </script>
+}
+@Html.ValidationSummary(false)
+@Html.Partial("_ProjectLink")
+<br />
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Project.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.Title)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Project.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.CustomerName)
+    </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Project.Manager)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Project.Manager)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.EstimatedHours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EstimatedHours)
+    </div>
+    @Html.DisplayForModel()
+
+    @Html.ActionLink("Complete Task", "CompleteTask", new { id = Model.Id })
+
+</fieldset>
+
+@Html.Partial("_Charges", Model)
+
+@Html.Partial("_AssignedToUsers")

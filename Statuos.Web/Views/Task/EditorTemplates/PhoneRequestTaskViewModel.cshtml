@@ -1,0 +1,8 @@
+﻿@model PhoneRequestTaskViewModel
+<div class="editor-label">
+    @Html.LabelFor(model => model.PhoneNumber)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PhoneNumber)
+    @Html.ValidationMessageFor(model => model.PhoneNumber)
+</div>

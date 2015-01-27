@@ -1,0 +1,55 @@
+﻿@model TaskViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Task")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    @Html.EditorFor(model => model.ConcreteModelType)
+    <fieldset>
+        <legend>TaskViewModel</legend>
+
+        @Html.HiddenFor(model => model.Project.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserNames)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserNames)
+            @Html.ValidationMessageFor(model => model.UserNames)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EstimatedHours)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EstimatedHours)
+            @Html.ValidationMessageFor(model => model.EstimatedHours)
+        </div>
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

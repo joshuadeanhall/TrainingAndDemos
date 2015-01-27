@@ -1,0 +1,18 @@
+﻿@model TaskViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@Html.Partial("_ProjectLink") <br />
+<h2>Edit</h2>
+
+@Html.Partial("_Edit")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

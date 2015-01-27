@@ -1,0 +1,55 @@
+﻿@model Statuos.Web.Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+@Html.ValidationSummary(true)
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ProjectViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CustomerId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EstimatedHours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EstimatedHours)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProjectType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectType)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

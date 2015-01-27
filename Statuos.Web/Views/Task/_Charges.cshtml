@@ -1,0 +1,30 @@
+﻿@model TaskViewModel
+
+<h2>Charges</h2>
+<br />
+@Html.ActionLink("Add Charge", "ChargeHours", new { id = Model.Id }, new { id = "addCharge" })
+<table id="taskCharges">
+    <thead>
+        <tr>
+            <th>
+                Hours
+            </th>
+            <th>
+                UserName
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Charges)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
