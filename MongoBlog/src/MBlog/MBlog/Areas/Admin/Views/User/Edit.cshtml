@@ -1,0 +1,39 @@
+﻿@model MBlog.Areas.Admin.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Change Password</h2>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">User: @Html.DisplayFor(model => model.UserName)</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+                @Html.HiddenFor(model => model.UserName)
+                @Html.HiddenFor(model => model.UserId)
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

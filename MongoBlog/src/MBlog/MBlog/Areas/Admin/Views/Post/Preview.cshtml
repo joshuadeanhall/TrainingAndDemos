@@ -1,0 +1,13 @@
+﻿@model MBlog.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Preview";
+}
+
+<h2>Preview</h2>
+
+@Html.Partial("PostDetails")
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

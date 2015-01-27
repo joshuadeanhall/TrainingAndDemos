@@ -1,0 +1,43 @@
+﻿@model MBlog.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+   
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "Title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content)
+        @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @placeholder = "Content" })
+        @Html.ValidationMessageFor(model => model.Content)
+    </div>
+
+    @Html.HiddenFor(model => model.PostId)
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Content');
+    </script>
+}

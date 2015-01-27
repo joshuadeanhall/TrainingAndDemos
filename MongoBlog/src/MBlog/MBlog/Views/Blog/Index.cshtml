@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/angular-resource.js"></script>
+<script src="~/Scripts/app/app.js"></script>
+<script src="~/Scripts/app/controller/postCtrl.js"></script>
+<script src="~/Scripts/app/services.js"></script>
+<script src="~/Scripts/angular-sanitize.js"></script>
+<div ng-controller="PostCtrl">
+    <div class="row" ng-repeat="post in posts">
+        <div class="col-lg-12"></div>
+        <h2>{{post.Title}}</h2>
+        <div ng-bind-html-unsafe="post.Content"></div>
+        <p>
+            <a class="btn btn-default" ng-href="/Details/{{post.PostId}}">View Post</a>
+        </p>
+    </div>
+</div>
+
