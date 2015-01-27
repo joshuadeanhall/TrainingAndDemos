@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureReportService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+  <Role name="ReportService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=octopusnotification;AccountKey=wX2Tet5/RXnRpWIDv+Q0ruMevc/OGMW9Gi0tNCkv+nWkPR1eYP3kq6uBvjLbQ1g8aSF6xHcHU5/mJ5vSoztpAw==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="cnalk" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEHj5jAlLY3OGTrSZOfN2k2swDQYJKoZIhvcNAQEBBQAEggEAojxDxCgp/IhUbagxbrwRT+IEygoBGqLHCBKqpk4u+LTDZ0PbzcZWYaTF7nKafEspZViv8tDjwCHacm/PPr3xNPTueiH/OeOmYV9dl/Ofu4SOsmEG/prvmy9cpnMdT89oI2Jl8HjWA0zu9W0qT27w6GT6aQzsOZdOTbnTndOI4MHdDUQ6pd02EBF4F3GICUDVusvG9lc2a6Zg167nLk76j/VW3rF0fT8M3HPvIGdJ1muGnSRewkAZhMYSzYwf7z12UnJSPJA+FBY5QiE8RX8l2sw+42FAo5ixHoOw7MQbEUNB8cVT/W3PaJjEFnNKjNHcEC8bxW9/KrN6tBs/YeaTbTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECOYWGbToPulmgBCv/d6bMP1y6XVMjqXige4l" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2015-02-23T23:59:59.0000000-05:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="Microsoft.ServiceBus.ConnectionString" value="Endpoint=sb://messageservice-ns.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=KRsfnJH3zT4TCGBi7zyHdapG3vND1Y2FaF6tgBKoko8=" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="E02B13D7D49139DCEA089119149F984EB313B041" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

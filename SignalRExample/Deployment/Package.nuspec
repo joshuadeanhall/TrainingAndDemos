@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>
+      AzureReportService
+    </id>
+    <version>
+      0.9.2.1
+    </version>
+    <authors>
+      Josh
+    </authors>
+    <description>
+      Example Azure Report Service
+    </description>
+  </metadata>
+  <files>
+    <file src="SignalRExample\AzureReportService\bin\Debug\app.publish\*.*" target="" />
+  </files>
+</package>
