@@ -1,0 +1,19 @@
+﻿<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="name" placeholder="Name" ng-model="project.name" />
+        </div>
+        <label for="effort" class="col-sm-2 control-label">Effort</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="effort" placeholder="Effort" ng-model="project.effort" />
+        </div>
+        <label for="cost" class="col-sm-2 control-label">Cost</label>
+        <div class="col-sm-10">
+            <input id="cost" class="form-control" placeholder="Cost" ng-model="project.cost" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="create()">Create</button>
+</form>
+
+<a class="btn btn-primary" ng-click="back()">Back to list</a>

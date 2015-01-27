@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KO_Angular_Demo", "KO_Angular_Demo\KO_Angular_Demo.csproj", "{473E48AB-1323-46AD-A6E0-8FF12CB42D63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD7AA07D-405C-4EC1-8747-A470BA17E0FD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473E48AB-1323-46AD-A6E0-8FF12CB42D63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

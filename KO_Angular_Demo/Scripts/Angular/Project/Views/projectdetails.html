@@ -1,0 +1,62 @@
+﻿
+<h2>Details</h2>
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-10">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <span>{{ project.Name }}</span>
+        </div>
+        <div class="col-sm-10">
+            <label for="effort" class="col-sm-2 control-label">Effort</label>
+            <span>{{ project.Effort }}</span>
+        </div>
+        <div class="col-sm-10">
+            <label for="cost" class="col-sm-2 control-label">Cost</label>
+            <span>{{ project.Cost }}</span>
+        </div>
+    </div>
+</form>
+
+<a class="btn btn-primary" ng-click="back()">Back to list</a>
+
+<h2>Tasks</h2>
+<div class="col-lg-4">
+    <a ng-click="create()">Create</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Assigned To
+            </th>
+            <th>
+                Hours Left
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="task in project.Tasks">
+        <tr>
+            <td>
+                <span>{{ task.Name }}</span>
+            </td>
+            <td>
+            </td>
+            <td>
+                <span>{{ task.Effort }}</span>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
